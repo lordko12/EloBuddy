@@ -161,7 +161,8 @@ namespace Auto_Carry_Vayne.Features.Utility
 
             if ((e.End.Distance(Variables._Player) <= 70) && Manager.MenuManager.GapcloseQ)
             {
-                Manager.SpellManager.E.Cast(sender);
+                var QPos = e.End.Extend(Variables._Player.Position, Manager.SpellManager.Q.Range);
+                Player.CastSpell(SpellSlot.Q, QPos.To3D());
             }
         }
         #endregion GapcloseQandE
@@ -218,9 +219,11 @@ namespace Auto_Carry_Vayne.Features.Utility
         #region AutoE
         public static void AutoE()
         {
+            var ctarget = Logic.Condemn.GetTarget(ObjectManager.Player.Position);
+            if (ctarget == null) return;
             if (Manager.MenuManager.AutoE && Manager.MenuManager.UseE && Manager.SpellManager.E.IsReady())
             {
-                Logic.Condemn.condemn();
+                Manager.SpellManager.E.Cast(ctarget);
             }
         }
     }

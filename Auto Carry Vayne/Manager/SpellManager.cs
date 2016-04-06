@@ -13,7 +13,7 @@ namespace Auto_Carry_Vayne.Manager
         public static Spell.Skillshot E2;
         public static Spell.Active R;
         public static Spell.Active Heal;
-        public static Item totem, Qss, Mercurial, HPPot, Biscuit;
+        public static Item totem, Qss, Mercurial, HPPot, Biscuit, zzrot;
 
         private static void SpellsItems()
         {
@@ -21,7 +21,12 @@ namespace Auto_Carry_Vayne.Manager
             Q2 = new Spell.Skillshot(SpellSlot.Q, 300, SkillShotType.Linear);
             W = new Spell.Active(SpellSlot.W);
             E = new Spell.Targeted(SpellSlot.E, 590);
-            E2 = new Spell.Skillshot(SpellSlot.E, 590, SkillShotType.Linear, 250, 1250);
+            E2 = new Spell.Skillshot(
+                SpellSlot.E,
+                (uint)(590 + ObjectManager.Player.BoundingRadius),
+                SkillShotType.Linear,
+                250,
+                1200);
             R = new Spell.Active(SpellSlot.R);
             var slot = Variables._Player.GetSpellSlotFromName("summonerheal");
             if (slot != SpellSlot.Unknown)
@@ -33,6 +38,7 @@ namespace Auto_Carry_Vayne.Manager
             Mercurial = new Item((int)ItemId.Mercurial_Scimitar);
             HPPot = new Item(2003);
             Biscuit = new Item(2010);
+            zzrot = new Item(ItemId.ZzRot_Portal, 400);
         }
 
         public static void Load()

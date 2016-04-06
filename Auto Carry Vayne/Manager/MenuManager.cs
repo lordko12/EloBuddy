@@ -116,6 +116,7 @@ namespace Auto_Carry_Vayne.Manager
             Hotkeymenu = VMenu.AddSubMenu("Hotkeys", "Hotkeys");
             Hotkeymenu.Add("flashe", new KeyBind("Flash Condemn!", false, KeyBind.BindTypes.HoldActive, 'Y'));
             Hotkeymenu.Add("insece", new KeyBind("Flash Insec!", false, KeyBind.BindTypes.HoldActive, 'Z'));
+            Hotkeymenu.Add("rote", new KeyBind("Zz'Rot Condemn!", false, KeyBind.BindTypes.HoldActive, 'N'));
             Hotkeymenu.Add("insecmodes", new ComboBox("Insec Mode", 0, "To Allys", "To Tower", "To Mouse"));
         }
 
@@ -123,6 +124,7 @@ namespace Auto_Carry_Vayne.Manager
         {
             ComboMenu = VMenu.AddSubMenu("Combo", "Combo");
             ComboMenu.Add("UseQ", new CheckBox("Use Q"));
+            ComboMenu.Add("UseQE", new CheckBox("Try to QE"));
             ComboMenu.Add("UseQStacks", new CheckBox("Use Q only if 2 W stacks", false));
             ComboMenu.Add("UseW", new CheckBox("Focus W", false));
             ComboMenu.Add("UseE", new CheckBox("Use E"));
@@ -140,8 +142,8 @@ namespace Auto_Carry_Vayne.Manager
             CondemnMenu = VMenu.AddSubMenu("Condemn", "Condemn");
             CondemnMenu.Add("UseEAuto", new CheckBox("Auto E"));
             CondemnMenu.Add("UseETarget", new CheckBox("Only Stun current target?", false));
-            CondemnMenu.Add("UseEHitchance", new Slider("Condemn Hitchance %", 33, 1));
-            CondemnMenu.Add("UseEPush", new Slider("Condemn Push Distance", 410, 350, 470));
+            CondemnMenu.Add("UseEHitchance", new Slider("Condemn Hitchance", 2, 1, 4));
+            CondemnMenu.Add("UseEPush", new Slider("Condemn Push Distance", 420, 350, 470));
             CondemnMenu.Add("UseEAA", new Slider("No E if target can be killed with x AA´s", 0, 0, 4));
             CondemnMenu.Add("AutoTrinket", new CheckBox("Use trinket bush?"));
             CondemnMenu.Add("J4Flag", new CheckBox("Condemn to J4 Flags?"));
@@ -252,6 +254,10 @@ namespace Auto_Carry_Vayne.Manager
         {
             get { return (Hotkeymenu["insece"].Cast<KeyBind>().CurrentValue); }
         }
+        public static bool RotE
+        {
+            get { return (Hotkeymenu["rote"].Cast<KeyBind>().CurrentValue); }
+        }
         public static int InsecPositions
         {
             get { return (Hotkeymenu["insecmodes"].Cast<ComboBox>().CurrentValue); }
@@ -261,6 +267,11 @@ namespace Auto_Carry_Vayne.Manager
         public static bool UseQ
         {
             get { return (VMenu["Combo"].Cast<CheckBox>().CurrentValue ? ComboMenu["UseQ"].Cast<CheckBox>().CurrentValue : true); }
+        }
+
+        public static bool UseQE
+        {
+            get { return (VMenu["Combo"].Cast<CheckBox>().CurrentValue ? ComboMenu["UseQE"].Cast<CheckBox>().CurrentValue : true); }
         }
 
         public static bool UseQStacks
@@ -324,12 +335,12 @@ namespace Auto_Carry_Vayne.Manager
 
         public static int CondemnHitchance
         {
-            get { return (VMenu["Condemn"].Cast<CheckBox>().CurrentValue ? CondemnMenu["UseEHitchance"].Cast<Slider>().CurrentValue : 50); }
+            get { return (VMenu["Condemn"].Cast<CheckBox>().CurrentValue ? CondemnMenu["UseEHitchance"].Cast<Slider>().CurrentValue : 2); }
         }
 
         public static int CondemnPushDistance
         {
-            get { return (VMenu["Condemn"].Cast<CheckBox>().CurrentValue ? CondemnMenu["UseEPush"].Cast<Slider>().CurrentValue : 410); }
+            get { return (VMenu["Condemn"].Cast<CheckBox>().CurrentValue ? CondemnMenu["UseEPush"].Cast<Slider>().CurrentValue : 420); }
         }
 
         public static int CondemnBlock

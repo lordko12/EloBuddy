@@ -11,23 +11,7 @@ namespace Auto_Carry_Vayne.Logic
 {
     class Mechanics
     {
-        public static void FlashE()
-        {
-            var positions = GetRotatedFlashPositions();
-
-            foreach (var p in positions)
-            {
-                var condemnUnit = CondemnCheck(p);
-                if (condemnUnit != null && Manager.MenuManager.FlashE)
-                {
-                    Manager.SpellManager.E.Cast(condemnUnit);
-
-                    Variables._Player.Spellbook.CastSpell(Variables.FlashSlot, p);
-
-                }
-            }
-        }
-
+        #region Mechanics:Insec
         public static void Insec()
         {
             if (!Manager.MenuManager.InsecE) return;
@@ -107,6 +91,24 @@ namespace Auto_Carry_Vayne.Logic
                             }
                         }
                         break;
+
+                }
+            }
+        }
+        #endregion
+        #region Mechanics:FlashE
+        public static void FlashE()
+        {
+            var positions = GetRotatedFlashPositions();
+
+            foreach (var p in positions)
+            {
+                var condemnUnit = CondemnCheck(p);
+                if (condemnUnit != null && Manager.MenuManager.FlashE)
+                {
+                    Manager.SpellManager.E.Cast(condemnUnit);
+
+                    Variables._Player.Spellbook.CastSpell(Variables.FlashSlot, p);
 
                 }
             }
@@ -197,6 +199,20 @@ namespace Auto_Carry_Vayne.Logic
             }
             return null;
         }
+        #endregion
+        #region Mechanics:RotE
+        public static void RotE()
+        {
+            var target = TargetSelector.GetTarget((int)Manager.SpellManager.zzrot.Range, DamageType.Physical);
+            if (Manager.MenuManager.RotE && Manager.SpellManager.E.IsReady() && Manager.SpellManager.zzrot.IsReady() && target != null)
+            {
+                if (Manager.SpellManager.E.Cast(target))
+                {
+                    Core.DelayAction(() => Manager.SpellManager.zzrot.Cast(target.ServerPosition.Extend(Variables._Player.ServerPosition, -100)), 100);
+                }
+            }
+        }
+        #endregion
     }
 }
 

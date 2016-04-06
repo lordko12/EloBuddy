@@ -11,7 +11,7 @@ using EloBuddy.SDK;
 
 namespace Auto_Carry_Vayne.Features.Utility
 {
-    class Drawing
+    class drawing
     {
         public static void OnDraw()
         {
@@ -79,6 +79,11 @@ namespace Auto_Carry_Vayne.Features.Utility
                     }
                 }
             }
+        }
+
+        internal static object WorldToScreen(Vector3 position)
+        {
+            throw new NotImplementedException();
         }
     }
 }

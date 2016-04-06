@@ -15,11 +15,10 @@ namespace Auto_Carry_Vayne.Features.Modes
             var target = TargetSelector.GetTarget((int)Variables._Player.GetAutoAttackRange(),
     DamageType.Physical);
 
-            UseQ();
+            UseQ2();
             UseE();
             UseR();
             UseTrinket(target);
-            if (Manager.MenuManager.CustomOrbwalk) Utility.Orbwalk.Customorbwalker();
         }
 
         public static void UseQ()
@@ -35,18 +34,35 @@ namespace Auto_Carry_Vayne.Features.Modes
                     return;
                 }
                 #endregion
-                var QPosition = Logic.MyQLogic.GetQPosition();
+                var QPosition = Logic.Tumble.GetQPosition();
                 Player.CastSpell(SpellSlot.Q, QPosition);
+            }
+        }
+
+        public static void UseQ2()
+        {
+            var target = TargetSelector.GetTarget((int)Variables._Player.GetAutoAttackRange(), DamageType.Physical);
+            if (target == null) return;
+            if (Utility.Orbwalk.AfterAttack && Manager.MenuManager.UseQ)
+            {
+                #region check for 2 w stacks
+                if (Manager.MenuManager.UseQStacks && target.GetBuffCount("vaynesilvereddebuff") != 2)
+                {
+                    return;
+                }
+                #endregion
+                Logic.Tumble.CastTumble(target);
+                Botrk(target);
             }
         }
 
         public static void UseE()
         {
-            var target = TargetSelector.GetTarget((int)Variables._Player.GetAutoAttackRange(), DamageType.Physical);
-
+            var ctarget = Logic.Condemn.GetTarget(ObjectManager.Player.Position);
+            if (ctarget == null) return;
             if (Utility.Orbwalk.AfterAttack && Manager.MenuManager.UseE)
             {
-                Logic.Condemn.condemn();
+                Manager.SpellManager.E.Cast(ctarget);
             }
         }
 
@@ -57,6 +73,21 @@ namespace Auto_Carry_Vayne.Features.Modes
                 if (Variables._Player.CountEnemiesInRange(1000) >= Manager.MenuManager.UseRSlider)
                 {
                     Manager.SpellManager.R.Cast();
+                }
+            }
+        }
+
+        public static void Botrk(Obj_AI_Base unit)
+        {
+            if (Utility.Orbwalk.AfterAttack && (unit.Distance(ObjectManager.Player) > 500f || (ObjectManager.Player.Health / ObjectManager.Player.MaxHealth) * 100 <= 95))
+            {
+                if (Item.HasItem(3144) && Item.CanUseItem(3144))
+                {
+                    Item.UseItem(3144, unit);
+                }
+                if (Item.HasItem(3153) && Item.CanUseItem(3153))
+                {
+                    Item.UseItem(3153, unit);
                 }
             }
         }

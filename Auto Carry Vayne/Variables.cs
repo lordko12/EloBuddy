@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Auto_Carry_Vayne
 {
-    class Variables
+    static class Variables
     {
         public static AIHeroClient _Player
         {
@@ -23,12 +23,6 @@ namespace Auto_Carry_Vayne
         public static bool VayneUltiIsActive { get; set; }
 
         public static SpellSlot FlashSlot;
-
-        public static float lastaa, lastaaclick;
-
-        public static bool stopmove;
-
-        public static float lastmove; //new humanizer for inbuilt orbwalk.
 
         public static int[] AbilitySequence;
 
@@ -46,6 +40,32 @@ namespace Auto_Carry_Vayne
 
         public static IEnumerable<AIHeroClient> ValidTargets { get { return EntityManager.Heroes.Enemies.Where(enemy => enemy.Health > 5 && enemy.IsVisible); } }
 
+        public static bool IsValidTargetEx(
+    this AttackableUnit unit,
+    float range,
+    bool checkTeam = true,
+    Vector3 from = default(Vector3))
+        {
+            var ai = unit as Obj_AI_Base;
+
+            if ((ai != null && ai.HasBuff("kindredrnodeathbuff") && ai.HealthPercent <= 10.0)
+                || checkTeam && unit.Team == ObjectManager.Player.Team)
+            {
+                return false;
+            }
+
+            var targetPosition = ai != null ? ai.ServerPosition : unit.Position;
+            var fromPosition = from.To2D().IsValid() ? from.To2D() : ObjectManager.Player.ServerPosition.To2D();
+
+            var distance2 = Vector2.DistanceSquared(fromPosition, targetPosition.To2D());
+            return distance2 <= range * range;
+        }
+
+        public static bool IsJ4Flag(Vector3 endPosition, Obj_AI_Base target)
+        {
+            return Manager.MenuManager.J4Flag
+                && ObjectManager.Get<Obj_AI_Base>().Any(m => m.Distance(endPosition) <= target.BoundingRadius && m.Name == "Beacon");
+        }
         #region MenuOptions
 
         public static bool Combo = false;

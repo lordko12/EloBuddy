@@ -11,11 +11,9 @@ namespace Auto_Carry_Vayne.Manager
         {
             Gapcloser.OnGapcloser += Gapcloser_OnGapCloser;
             Interrupter.OnInterruptableSpell += Interrupter_OnInterruptableSpell;
-            Obj_AI_Base.OnBasicAttack += Obj_Ai_Base_OnBasicAttack;
             Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
             Obj_AI_Base.OnSpellCast += Obj_AI_Base_OnSpellCast;
             Game.OnTick += Game_OnTick;
-            Player.OnIssueOrder += Player_OnIssueOrder;
             Drawing.OnDraw += OnDraw;
             Logic.Mechanics.LoadFlash();
             Turrets.Load();
@@ -44,7 +42,6 @@ namespace Auto_Carry_Vayne.Manager
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) Features.Modes.JungleClear.Load();
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee)) Features.Modes.Flee.Load();
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo)) Features.Modes.Combo.Load();
-            if (MenuManager.CustomOrbwalk) Features.Utility.Orbwalk.EloBuddyOrbDisabler();
         }
 
         private static void Gapcloser_OnGapCloser(AIHeroClient sender, Gapcloser.GapcloserEventArgs e)
@@ -58,19 +55,9 @@ namespace Auto_Carry_Vayne.Manager
             Features.Utility.Misc.Interrupt(sender, e);
         }
 
-        private static void Obj_Ai_Base_OnBasicAttack(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
-        {
-            Features.Utility.Orbwalk.AutoAttack(sender, args);
-        }
-
         private static void Obj_AI_Base_OnBuffGain(Obj_AI_Base sender, Obj_AI_BaseBuffGainEventArgs args)
         {
             Features.Utility.Items.BuffGain(sender, args);
-        }
-
-        private static void Player_OnIssueOrder(Obj_AI_Base sender, PlayerIssueOrderEventArgs args)
-        {
-            Features.Utility.Orbwalk.IssueOrder(sender, args);
         }
 
         private static void Obj_AI_Base_OnSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
@@ -80,7 +67,7 @@ namespace Auto_Carry_Vayne.Manager
 
         private static void OnDraw(EventArgs args)
         {
-            Features.Utility.Drawing.OnDraw();
+            Features.Utility.drawing.OnDraw();
         }
     }
 }

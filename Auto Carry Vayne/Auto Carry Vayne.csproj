@@ -62,13 +62,13 @@
     <Compile Include="Features\Modes\JungleClear.cs" />
     <Compile Include="Features\Modes\LaneClear.cs" />
     <Compile Include="Features\Utility\Drawing.cs" />
+    <Compile Include="Features\Utility\FunboxOrb.cs" />
     <Compile Include="Features\Utility\Items.cs" />
     <Compile Include="Features\Utility\Misc.cs" />
-    <Compile Include="Features\Utility\Orbwalk.cs" />
     <Compile Include="Features\Utility\Summoners.cs" />
     <Compile Include="Logic\Condemn.cs" />
     <Compile Include="Logic\Mechanics.cs" />
-    <Compile Include="Logic\MyQLogic.cs" />
+    <Compile Include="Logic\Tumble.cs" />
     <Compile Include="Manager\DamageManager.cs" />
     <Compile Include="Manager\EventManager.cs" />
     <Compile Include="Manager\Manager.cs" />

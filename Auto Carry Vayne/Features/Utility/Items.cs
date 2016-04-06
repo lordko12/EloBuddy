@@ -39,7 +39,7 @@ namespace Auto_Carry_Vayne.Features.Utility
         {
             if (sender.IsMe && args.Buff.Name == "vaynetumblebonus")
             {
-                Variables.lastaa = 0;
+                Orbwalk.ResetAutoAttack(0f);
             }
 
             if (!sender.IsMe) return;

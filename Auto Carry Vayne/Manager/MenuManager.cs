@@ -125,7 +125,10 @@ namespace Auto_Carry_Vayne.Manager
             ComboMenu = VMenu.AddSubMenu("Combo", "Combo");
             ComboMenu.Add("UseQ", new CheckBox("Use Q"));
             ComboMenu.Add("UseQE", new CheckBox("Try to QE"));
+            ComboMenu.Add("UseQWall", new CheckBox("Block Q in wall"));
+            ComboMenu.Add("UseQEnemies", new Slider("Block Q in x enemies", 3, 5, 0));
             ComboMenu.Add("UseQStacks", new CheckBox("Use Q only if 2 W stacks", false));
+            ComboMenu.Add("UseQMode", new ComboBox("Q Mode", 1, "Side", "Safe Position"));
             ComboMenu.Add("UseW", new CheckBox("Focus W", false));
             ComboMenu.Add("UseE", new CheckBox("Use E"));
             ComboMenu.Add("UseEKill", new CheckBox("Use E if killable?"));
@@ -133,7 +136,6 @@ namespace Auto_Carry_Vayne.Manager
             ComboMenu.Add("UseRif", new Slider("Use R if", 2, 1, 5));
             ComboMenu.Add("RnoAA", new CheckBox("No AA while stealth", false));
             ComboMenu.Add("RnoAAif", new Slider("No AA stealth when >= enemy in range", 2, 0, 5));
-            ComboMenu.Add("Orbwalk", new CheckBox("Custom Orbwalk"));
 
         }
 
@@ -187,7 +189,7 @@ namespace Auto_Carry_Vayne.Manager
             MiscMenu.Add("LowLifeE", new CheckBox("Low Life E", false));
             MiscMenu.Add("LowLifeES", new Slider("Low Life E if =>", 20));
             MiscMenu.AddGroupLabel("Utility");
-            MiscMenu.Add("Skinhack", new CheckBox("Activate Skin hack"));
+            MiscMenu.Add("Skinhack", new CheckBox("Activate Skin hack", false));
             MiscMenu.Add("SkinId", new ComboBox("Skin Hack", 0, "Default", "Vindicator", "Aristocrat", "Dragonslayer", "Heartseeker", "SKT T1", "Arclight", "Vayne Chroma Green", "Vayne Chroma Red", "Vayne Chroma Grey"));
             MiscMenu.Add("Autolvl", new CheckBox("Activate Auto level"));
             MiscMenu.Add("AutolvlS", new ComboBox("Level Mode", 0, "Max W", "Max Q(my style)"));
@@ -269,6 +271,21 @@ namespace Auto_Carry_Vayne.Manager
             get { return (VMenu["Combo"].Cast<CheckBox>().CurrentValue ? ComboMenu["UseQ"].Cast<CheckBox>().CurrentValue : true); }
         }
 
+        public static int UseQEnemies
+        {
+            get { return (VMenu["Combo"].Cast<CheckBox>().CurrentValue ? ComboMenu["UseQEnemies"].Cast<Slider>().CurrentValue : 3); }
+        }
+
+        public static bool UseQWall
+        {
+            get { return (VMenu["Combo"].Cast<CheckBox>().CurrentValue ? ComboMenu["UseQWall"].Cast<CheckBox>().CurrentValue : true); }
+        }
+
+        public static int UseQMode
+        {
+            get { return (VMenu["Combo"].Cast<CheckBox>().CurrentValue ? ComboMenu["UseQMode"].Cast<ComboBox>().CurrentValue : 1); }
+        }
+
         public static bool UseQE
         {
             get { return (VMenu["Combo"].Cast<CheckBox>().CurrentValue ? ComboMenu["UseQE"].Cast<CheckBox>().CurrentValue : true); }
@@ -312,11 +329,6 @@ namespace Auto_Carry_Vayne.Manager
         public static int RNoAASlider
         {
             get { return (VMenu["Combo"].Cast<CheckBox>().CurrentValue ? ComboMenu["RnoAAif"].Cast<Slider>().CurrentValue : 3); }
-        }
-
-        public static bool CustomOrbwalk
-        {
-            get { return (VMenu["Combo"].Cast<CheckBox>().CurrentValue ? ComboMenu["Orbwalk"].Cast<CheckBox>().CurrentValue : true); }
         }
 
         //Condemn

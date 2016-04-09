@@ -25,16 +25,14 @@ namespace Auto_Carry_Vayne.Features.Utility
         #region AutoBuyTrinkets
         public static void AutobuyTrinkets()
         {
-            if (Game.MapId == GameMapId.SummonersRift)
+            if (Game.MapId == GameMapId.SummonersRift && Manager.MenuManager.AutobuyTrinkets)
             {
                 if (Variables._Player.IsInShopRange() &&
-                    Manager.MenuManager.AutobuyTrinkets &&
                     Variables._Player.Level > 9 && Item.HasItem((int)ItemId.Warding_Totem_Trinket))
                 {
                     Shop.BuyItem(ItemId.Farsight_Alteration);
                 }
                 if (Variables._Player.IsInShopRange() &&
-                    Manager.MenuManager.AutobuyTrinkets &&
                     !Item.HasItem((int)ItemId.Sweeping_Lens_Trinket, Variables._Player) && Variables._Player.Level > 6 &&
                     EntityManager.Heroes.Enemies.Any(
                         h =>
@@ -101,15 +99,9 @@ namespace Auto_Carry_Vayne.Features.Utility
         #region LowLifeE
         public static void LowlifeE()
         {
-            if (!Manager.SpellManager.E.IsReady() || !Manager.MenuManager.LowLifeE ||
-                Variables._Player.HealthPercent > Manager.MenuManager.LowLifeESlider)
-            {
-                return;
-            }
-
             var meleeEnemies = EntityManager.Heroes.Enemies.FindAll(m => m.IsMelee);
 
-            if (meleeEnemies.Any())
+            if (meleeEnemies.Any() && Manager.SpellManager.E.IsReady() && Manager.MenuManager.LowLifeE && Variables._Player.HealthPercent > Manager.MenuManager.LowLifeESlider)
             {
                 var mostDangerous =
                     meleeEnemies.OrderByDescending(m => m.GetAutoAttackDamage(Variables._Player)).First();
@@ -179,7 +171,6 @@ namespace Auto_Carry_Vayne.Features.Utility
         #region FocusW
         public static void FocusW()
         {
-
             if (Manager.MenuManager.FocusW)
             {
                 if (FocusWTarget == null &&

@@ -11,21 +11,23 @@ namespace Auto_Carry_Vayne.Features.Utility
     class Items
     {
         #region Potions
-        public static void AutoPotions()
+        public static void AutoPotion()
         {
-            if (Manager.MenuManager.AutoPotion && !Variables._Player.IsInShopRange() &&
-                Variables._Player.HealthPercent <= Manager.MenuManager.AutoPotionHp &&
-                !(Player.HasBuff("RegenerationPotion")))
+            if (!Manager.MenuManager.AutoPotion || Variables._Player.HealthPercent > Manager.MenuManager.AutoPotionHp) return;
+
+            if (!Variables._Player.IsInShopRange() && !(Player.HasBuff("RegenerationPotion")))
             {
                 if (Manager.SpellManager.HPPot.IsReady() && Manager.SpellManager.HPPot.IsOwned())
                 {
                     Manager.SpellManager.HPPot.Cast();
                 }
             }
+        }
+        public static void AutoBiscuit()
+        {
+            if (!Manager.MenuManager.AutoBiscuit || Variables._Player.HealthPercent > Manager.MenuManager.AutoBiscuitHp) return;
 
-            if (Manager.MenuManager.AutoBiscuit && !Variables._Player.IsInShopRange() &&
-    Variables._Player.HealthPercent <= Manager.MenuManager.AutoBiscuitHp &&
-    !(Player.HasBuff("RegenerationPotion")))
+            if (!Variables._Player.IsInShopRange() && !(Player.HasBuff("RegenerationPotion")))
             {
                 if (Manager.SpellManager.Biscuit.IsReady() && Manager.SpellManager.Biscuit.IsOwned())
                 {
@@ -37,11 +39,6 @@ namespace Auto_Carry_Vayne.Features.Utility
         #region Qss
         public static void BuffGain(Obj_AI_Base sender, Obj_AI_BaseBuffGainEventArgs args)
         {
-            if (sender.IsMe && args.Buff.Name == "vaynetumblebonus")
-            {
-                Orbwalk.ResetAutoAttack(0f);
-            }
-
             if (!sender.IsMe) return;
 
             if (args.Buff.Type == BuffType.Taunt && Manager.MenuManager.QssTaunt)

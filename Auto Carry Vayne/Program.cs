@@ -16,7 +16,6 @@ namespace Auto_Carry_Vayne
             if (Variables._Player.ChampionName != "Vayne") return;
             Chat.Print("Auto Carry Vayne loaded! Made by Aka.");
             Manager.Manager.Load();
-            if (Manager.MenuManager.CustomOrbwalk) Features.Utility.Orbwalk.FunboxOrbInit();
         }
     }
 }

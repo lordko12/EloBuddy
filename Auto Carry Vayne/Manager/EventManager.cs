@@ -13,7 +13,9 @@ namespace Auto_Carry_Vayne.Manager
             Interrupter.OnInterruptableSpell += Interrupter_OnInterruptableSpell;
             Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
             Obj_AI_Base.OnSpellCast += Obj_AI_Base_OnSpellCast;
-            Game.OnTick += Game_OnTick;
+            Orbwalker.OnPostAttack += Orbwalker_OnPostAttack;
+            Game.OnPostTick += delegate { Afterattack = false; };
+            Game.OnUpdate += Game_OnTick;
             Drawing.OnDraw += OnDraw;
             Logic.Mechanics.LoadFlash();
             Turrets.Load();
@@ -22,9 +24,11 @@ namespace Auto_Carry_Vayne.Manager
         private static void Game_OnTick(EventArgs args)
         {
             //Summoners
-            Features.Utility.Summoners.Heal();
+            Features.Utility.Summoners.Healme();
+            Features.Utility.Summoners.Healally();
             //Items
-            Features.Utility.Items.AutoPotions();
+            Features.Utility.Items.AutoPotion();
+            Features.Utility.Items.AutoBiscuit();
             //Misc
             Features.Utility.Misc.AutobuyTrinkets();
             Features.Utility.Misc.AutoLevelUp();
@@ -42,6 +46,11 @@ namespace Auto_Carry_Vayne.Manager
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) Features.Modes.JungleClear.Load();
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee)) Features.Modes.Flee.Load();
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo)) Features.Modes.Combo.Load();
+        }
+
+        private static void Orbwalker_OnPostAttack(AttackableUnit target, EventArgs args)
+        {
+            Afterattack = true;
         }
 
         private static void Gapcloser_OnGapCloser(AIHeroClient sender, Gapcloser.GapcloserEventArgs e)
@@ -69,5 +78,7 @@ namespace Auto_Carry_Vayne.Manager
         {
             Features.Utility.drawing.OnDraw();
         }
+
+        public static bool Afterattack { get; private set; }
     }
 }

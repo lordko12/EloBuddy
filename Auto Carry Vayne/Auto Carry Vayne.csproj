@@ -62,9 +62,9 @@
     <Compile Include="Features\Modes\JungleClear.cs" />
     <Compile Include="Features\Modes\LaneClear.cs" />
     <Compile Include="Features\Utility\Drawing.cs" />
-    <Compile Include="Features\Utility\FunboxOrb.cs" />
     <Compile Include="Features\Utility\Items.cs" />
     <Compile Include="Features\Utility\Misc.cs" />
+    <Compile Include="Features\Utility\Orbwalk.cs" />
     <Compile Include="Features\Utility\Summoners.cs" />
     <Compile Include="Logic\Condemn.cs" />
     <Compile Include="Logic\Mechanics.cs" />
@@ -82,9 +82,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

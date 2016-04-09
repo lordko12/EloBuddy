@@ -99,12 +99,14 @@ namespace Auto_Carry_Vayne.Logic
         #region Mechanics:FlashE
         public static void FlashE()
         {
+            if (!Manager.MenuManager.FlashE) return;
+
             var positions = GetRotatedFlashPositions();
 
             foreach (var p in positions)
             {
                 var condemnUnit = CondemnCheck(p);
-                if (condemnUnit != null && Manager.MenuManager.FlashE)
+                if (condemnUnit != null)
                 {
                     Manager.SpellManager.E.Cast(condemnUnit);
 

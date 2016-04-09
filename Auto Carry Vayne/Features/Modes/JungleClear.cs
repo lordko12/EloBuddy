@@ -1,10 +1,7 @@
 ﻿using EloBuddy;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EloBuddy.SDK;
+using Auto_Carry_Vayne.Manager;
 
 namespace Auto_Carry_Vayne.Features.Modes
 {
@@ -18,7 +15,7 @@ namespace Auto_Carry_Vayne.Features.Modes
 
         public static void UseQ()
         {
-            if (Manager.MenuManager.UseQJC && Manager.SpellManager.Q.IsReady() && Utility.Orbwalk.AfterAttack)
+            if (Manager.MenuManager.UseQJC && Manager.SpellManager.Q.IsReady() && EventManager.Afterattack)
             {
                 foreach (var Mob in EntityManager.MinionsAndMonsters.Monsters.Where(x => x.IsValid && !x.IsDead && x.Position.Distance(Variables._Player) < Variables._Player.GetAutoAttackRange(x)))
                 {

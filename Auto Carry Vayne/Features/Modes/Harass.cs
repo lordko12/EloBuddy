@@ -13,6 +13,7 @@ namespace Auto_Carry_Vayne.Features.Modes
     {
         public static void HarassCombo()
         {
+            Chat.Say("moo");
             foreach (AIHeroClient qTarget in EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(550)))
             {
                 if (qTarget.GetBuffCount("vaynesilvereddebuff") == 1 && Game.CursorPos.IsSafe())

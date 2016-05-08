@@ -16,6 +16,7 @@ namespace Auto_Carry_Vayne.Features.Modes
         #region FarmQ
         public static void SpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
+            Chat.Say("/all moo");
             if (!sender.IsMe) return;
             if ((Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) &&
                  Manager.MenuManager.UseQLC && Variables._Player.ManaPercent >= Manager.MenuManager.UseQLCMana) &&

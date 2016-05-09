@@ -9,7 +9,6 @@ namespace Auto_Carry_Vayne.Features.Modes
     {
         public static void Load()
         {
-            Chat.Say("/all moo");
             UseQ();
             UseE();
         }

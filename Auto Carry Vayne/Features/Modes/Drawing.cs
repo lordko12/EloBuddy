@@ -13,7 +13,12 @@ namespace Auto_Carry_Vayne.Features.Utility
 {
     class drawing
     {
-        public static void OnDraw()
+        public static void Load()
+        {
+            Drawing.OnDraw += OnDraw;
+        }
+
+        public static void OnDraw(EventArgs args)
         {
             if (Manager.MenuManager.DrawE)
             {

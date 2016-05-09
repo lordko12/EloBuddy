@@ -3,41 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EloBuddy.SDK;
 using EloBuddy;
+using EloBuddy.SDK;
 
-namespace Auto_Carry_Vayne.Features.Utility
+namespace Auto_Carry_Vayne.Features.Module.Items
 {
-    class Items
+    class Qss : IModule
     {
-        #region Potions
-        public static void AutoPotion()
+        public void OnLoad()
         {
-            if (!Manager.MenuManager.AutoPotion || Variables._Player.HealthPercent > Manager.MenuManager.AutoPotionHp) return;
-
-            if (!Variables._Player.IsInShopRange() && !(Player.HasBuff("RegenerationPotion")))
-            {
-                if (Manager.SpellManager.HPPot.IsReady() && Manager.SpellManager.HPPot.IsOwned())
-                {
-                    Manager.SpellManager.HPPot.Cast();
-                }
-            }
+            Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
         }
-        public static void AutoBiscuit()
+
+        public ModuleType GetModuleType()
         {
-            if (!Manager.MenuManager.AutoBiscuit || Variables._Player.HealthPercent > Manager.MenuManager.AutoBiscuitHp) return;
-
-            if (!Variables._Player.IsInShopRange() && !(Player.HasBuff("RegenerationPotion")))
-            {
-                if (Manager.SpellManager.Biscuit.IsReady() && Manager.SpellManager.Biscuit.IsOwned())
-                {
-                    Manager.SpellManager.Biscuit.Cast();
-                }
-            }
+            return ModuleType.OnUpdate;
         }
-        #endregion Potions
-        #region Qss
-        public static void BuffGain(Obj_AI_Base sender, Obj_AI_BaseBuffGainEventArgs args)
+
+        private static void Obj_AI_Base_OnBuffGain(Obj_AI_Base sender, Obj_AI_BaseBuffGainEventArgs args)
         {
             if (!sender.IsMe) return;
 
@@ -124,6 +107,12 @@ namespace Auto_Carry_Vayne.Features.Utility
                 Core.DelayAction(() => Manager.SpellManager.Mercurial.Cast(), Manager.MenuManager.QssDelay);
             }
         }
-        #endregion Qss
+
+        public bool ShouldGetExecuted()
+        {
+            return false;
+        }
+
+        public void OnExecute() { }
     }
 }

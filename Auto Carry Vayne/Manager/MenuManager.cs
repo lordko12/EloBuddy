@@ -194,6 +194,8 @@ namespace Auto_Carry_Vayne.Manager
             MiscMenu.Add("AutolvlS", new ComboBox("Level Mode", 0, "Max W", "Max Q(my style)"));
             MiscMenu.Add("Autobuy", new CheckBox("Autobuy Starters"));
             MiscMenu.Add("Autobuyt", new CheckBox("Autobuy Trinkets"));
+            MiscMenu.Add("Autolantern", new CheckBox("Auto Lantern"));
+            MiscMenu.Add("AutolanternHP", new Slider("Auto Lantern if Hp =>", 40));
         }
 
         private static void Activator()
@@ -245,8 +247,10 @@ namespace Auto_Carry_Vayne.Manager
             DrawingMenu = VMenu.AddSubMenu("Drawings", "Drawings");
             DrawingMenu.Add("DrawQ", new CheckBox("Draw Q", false));
             DrawingMenu.Add("DrawE", new CheckBox("Draw E", false));
-            DrawingMenu.Add("DrawCondemn", new CheckBox("Draw Condemn"));
             DrawingMenu.Add("DrawOnlyReady", new CheckBox("Draw Only if Spells are ready"));
+            DrawingMenu.AddGroupLabel("Prediction");
+            DrawingMenu.Add("DrawCondemn", new CheckBox("Draw Condemn"));
+            DrawingMenu.Add("DrawTumble", new CheckBox("Draw Tumble"));
         }
 
         #region checkvalues
@@ -476,6 +480,15 @@ namespace Auto_Carry_Vayne.Manager
             get { return (VMenu["Misc"].Cast<CheckBox>().CurrentValue ? MiscMenu["Autobuyt"].Cast<CheckBox>().CurrentValue : true); }
         }
 
+        public static bool AutoLantern
+        {
+            get { return (VMenu["Misc"].Cast<CheckBox>().CurrentValue ? MiscMenu["Autolantern"].Cast<CheckBox>().CurrentValue : true); }
+        }
+
+        public static int AutoLanternS
+        {
+            get { return (VMenu["Misc"].Cast<CheckBox>().CurrentValue ? MiscMenu["AutolanternHP"].Cast<Slider>().CurrentValue : 40); }
+        }
 
         #endregion checkvalues:Misc
         #region checkvalues:Activator
@@ -615,6 +628,11 @@ namespace Auto_Carry_Vayne.Manager
         public static bool DrawCondemn
         {
             get { return (VMenu["Drawing"].Cast<CheckBox>().CurrentValue ? DrawingMenu["DrawCondemn"].Cast<CheckBox>().CurrentValue : true); }
+        }
+
+        public static bool DrawTumble
+        {
+            get { return (VMenu["Drawing"].Cast<CheckBox>().CurrentValue ? DrawingMenu["DrawTumble"].Cast<CheckBox>().CurrentValue : true); }
         }
 
         public static bool DrawOnlyRdy

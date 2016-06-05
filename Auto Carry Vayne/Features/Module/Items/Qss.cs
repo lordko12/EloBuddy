@@ -17,7 +17,7 @@ namespace Auto_Carry_Vayne.Features.Module.Items
 
         public ModuleType GetModuleType()
         {
-            return ModuleType.OnUpdate;
+            return ModuleType.Other;
         }
 
         private static void Obj_AI_Base_OnBuffGain(Obj_AI_Base sender, Obj_AI_BaseBuffGainEventArgs args)

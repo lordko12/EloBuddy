@@ -24,7 +24,7 @@ namespace Auto_Carry_Vayne.Features.Module.Misc
 
         public bool ShouldGetExecuted()
         {
-            return Manager.MenuManager.AutoLantern && Manager.MenuManager.AutoLanternS <= Variables._Player.HealthPercent && Variables.ThreshInGame();
+            return Manager.MenuManager.AutoLantern && Manager.MenuManager.AutoLanternS >= Variables._Player.HealthPercent && Variables.ThreshInGame();
         }
 
         public void OnExecute()

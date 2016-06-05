@@ -15,9 +15,9 @@ namespace Auto_Carry_Vayne.Features.Module.Misc
             Player.OnIssueOrder += IssueOrder;
         }
 
-        public static void IssueOrder(Obj_AI_Base sender, PlayerIssueOrderEventArgs args)
+        void IssueOrder(Obj_AI_Base sender, PlayerIssueOrderEventArgs args)
         {
-            if (sender.IsMe
+            if (sender.IsMe && ShouldGetExecuted()
                 && (args.Order == GameObjectOrder.AttackUnit || args.Order == GameObjectOrder.AttackTo)
                 &&
                 (Variables._Player.CountEnemiesInRange(1000f) >

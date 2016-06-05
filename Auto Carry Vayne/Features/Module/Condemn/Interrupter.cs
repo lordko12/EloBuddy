@@ -27,7 +27,7 @@ namespace Auto_Carry_Vayne.Features.Module.Condemn
 
         public ModuleType GetModuleType()
         {
-            return ModuleType.OnUpdate;
+            return ModuleType.Other;
         }
 
         public bool ShouldGetExecuted()

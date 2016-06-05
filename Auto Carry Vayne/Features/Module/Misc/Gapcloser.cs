@@ -14,12 +14,12 @@ namespace Auto_Carry_Vayne.Features.Module.Misc
         {
             if (sender == null || sender.IsAlly) return;
 
-            if ((e.End.Distance(Variables._Player) <= 70) && Manager.MenuManager.GapcloseE)
+            if ((e.End.Distance(Variables._Player) <= 70) && Manager.MenuManager.GapcloseE && Manager.SpellManager.E.IsReady())
             {
                 Manager.SpellManager.E.Cast(sender);
             }
 
-            if ((e.End.Distance(Variables._Player) <= 70) && Manager.MenuManager.GapcloseQ)
+            if ((e.End.Distance(Variables._Player) <= 70) && Manager.MenuManager.GapcloseQ && Manager.SpellManager.Q.IsReady())
             {
                 var QPos = e.End.Extend(Variables._Player.Position, Manager.SpellManager.Q.Range);
                 Player.CastSpell(SpellSlot.Q, QPos.To3D());
@@ -28,12 +28,12 @@ namespace Auto_Carry_Vayne.Features.Module.Misc
 
         public ModuleType GetModuleType()
         {
-            return ModuleType.OnUpdate;
+            return ModuleType.Other;
         }
 
         public bool ShouldGetExecuted()
         {
-            return Manager.MenuManager.RNoAA;
+            return true;
         }
 
         public void OnExecute() { }

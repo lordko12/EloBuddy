@@ -46,12 +46,12 @@ namespace Auto_Carry_Vayne.Features.Module.Misc
 
         public ModuleType GetModuleType()
         {
-            return ModuleType.OnUpdate;
+            return ModuleType.Other;
         }
 
         public bool ShouldGetExecuted()
         {
-            return false;
+            return true;
         }
 
         public void OnExecute() { }

@@ -30,7 +30,7 @@ namespace Auto_Carry_Vayne.Manager
             Logic.Mechanics.Insec();
 
             //Reset the positions
-            Variables.EndPosition = Logic.NewTumble.AkaQPosition();
+            Variables.EndPosition = Logic.Tumble.AkaQPosition();
 
             foreach (var module in Variables.moduleList.Where(module => module.GetModuleType() == ModuleType.OnUpdate
     && module.ShouldGetExecuted()))

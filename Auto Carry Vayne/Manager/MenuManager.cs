@@ -127,9 +127,7 @@ namespace Auto_Carry_Vayne.Manager
             ComboMenu = VMenu.AddSubMenu("Combo", "Combo");
             ComboMenu.Add("UseQ", new CheckBox("Use Q"));
             ComboMenu.Add("UseQStacks", new CheckBox("Use Q only if 2 W stacks", false));
-            ComboMenu.Add("UseQWall", new CheckBox("Block Q in wall"));
-            ComboMenu.Add("UseQEnemies", new Slider("Block Q in x enemies", 3, 5, 0));
-            ComboMenu.Add("UseQMode", new ComboBox("Q Mode", 1, "Side", "Safe Position", "Mouse"));
+            ComboMenu.Add("UseQMode", new ComboBox("Q Mode", 0, "Auto", "Mouse"));
             ComboMenu.Add("UseW", new CheckBox("Focus W", false));
             ComboMenu.Add("UseE", new CheckBox("Use E"));
             ComboMenu.Add("UseEKill", new CheckBox("Use E if killable?"));
@@ -284,16 +282,6 @@ namespace Auto_Carry_Vayne.Manager
         public static bool UseQ
         {
             get { return (VMenu["Combo"].Cast<CheckBox>().CurrentValue ? ComboMenu["UseQ"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static int UseQEnemies
-        {
-            get { return (VMenu["Combo"].Cast<CheckBox>().CurrentValue ? ComboMenu["UseQEnemies"].Cast<Slider>().CurrentValue : 3); }
-        }
-
-        public static bool UseQWall
-        {
-            get { return (VMenu["Combo"].Cast<CheckBox>().CurrentValue ? ComboMenu["UseQWall"].Cast<CheckBox>().CurrentValue : true); }
         }
 
         public static int UseQMode

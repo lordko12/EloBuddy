@@ -89,7 +89,6 @@
     <Compile Include="Features\Modes\Drawing.cs" />
     <Compile Include="Logic\Mechanics.cs" />
     <Compile Include="Logic\Condemn.cs" />
-    <Compile Include="Logic\NewTumble.cs" />
     <Compile Include="Logic\Tumble.cs" />
     <Compile Include="Manager\DamageManager.cs" />
     <Compile Include="Manager\EventManager.cs" />

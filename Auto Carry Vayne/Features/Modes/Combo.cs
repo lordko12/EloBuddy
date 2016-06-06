@@ -7,6 +7,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using Auto_Carry_Vayne.Manager;
 using Auto_Carry_Vayne.Logic;
+using SharpDX;
 
 namespace Auto_Carry_Vayne.Features.Modes
 {
@@ -34,7 +35,17 @@ namespace Auto_Carry_Vayne.Features.Modes
                     return;
                 }
                 #endregion
-                var TumblePos = NewTumble.AkaQPosition();
+                var TumblePos = Vector3.Zero;
+                int DashMode = MenuManager.UseQMode;
+
+                if (DashMode == 0)
+                {
+                    TumblePos = Tumble.AkaQPosition();
+                }
+                if (DashMode == 1)
+                {
+                    TumblePos = Game.CursorPos;
+                }
                 Player.CastSpell(SpellSlot.Q, TumblePos);
             }
         }

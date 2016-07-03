@@ -77,7 +77,6 @@ namespace AkaYasuo.Modes
         {
             if (MenuManager.MiscMenu["skinhack"].Cast<CheckBox>().CurrentValue)
             {
-                Player.SetSkinId((int)MenuManager.MiscMenu["skinId"].Cast<ComboBox>().CurrentValue);
             }
         }
 

@@ -172,30 +172,16 @@ namespace AkaYasuo.Modes
                         {
                             if (!Variables.HaveQ3)
                             {
-                                Program.Q.Cast(target);
+                                var predPos = Program.Q.GetPrediction(target);
+
+                                if (predPos.HitChancePercent >= MenuManager.PredictionMenu["QPred"].Cast<Slider>().CurrentValue)
+                                {
+                                    Program.Q.Cast(predPos.CastPosition);
+                                }
                             }
-                            else if (Variables.HaveQ3)
+                            else
                             {
-                                var hit = -1;
-                                var predPos = new Vector3();
-                                foreach (var hero in EntityManager.Heroes.Enemies.Where(i => i.IsValidTarget(Variables.Q2Range)))
-                                {
-                                    var pred = Prediction.Position.PredictLinearMissile(hero, Variables.Q2Range, Program.Q2.Width, Program.Q2.CastDelay, Program.Q2.Speed, int.MaxValue, Variables._Player.ServerPosition, true);
-                                    var pred2 = pred.GetCollisionObjects<AIHeroClient>();
-                                    if (pred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.High && pred2.Length > hit)
-                                    {
-                                        hit = pred2.Length;
-                                        predPos = pred.CastPosition;
-                                    }
-                                }
-                                if (predPos.IsValid())
-                                {
-                                    Core.DelayAction(() => Program.Q2.Cast(predPos), 250);
-                                }
-                                else
-                                {
-                                    Core.DelayAction(() => Program.Q2.Cast(target.Position), 250);
-                                }
+                                    Program.Q2.Cast(target.ServerPosition);
                             }
                         }
                     }

@@ -9,7 +9,9 @@ namespace AkaYasuo.Events
     {
         public static void Drawings(EventArgs args)
         {
-            if (Variables._Player.IsDead) { return; }
+            if (Variables._Player.IsDead) return;
+
+
             if (MenuManager.DrawingMenu["DrawQ"].Cast<CheckBox>().CurrentValue && Program.Q.IsReady())
             {
                 Drawing.DrawCircle(Variables._Player.Position, Program.Q.Range, System.Drawing.Color.Green);

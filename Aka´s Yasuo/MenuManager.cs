@@ -15,6 +15,7 @@ namespace AkaYasuo
     internal class MenuManager
     {
         public static Menu YMenu,
+            PredictionMenu,
             ComboMenu,
             HarassMenu,
             LaneClearMenu,
@@ -32,6 +33,7 @@ namespace AkaYasuo
         public static void Load()
         {
             Mainmenu();
+            Predictionmenu();
             Combomenu();
             Harassmenu();
             Fleemenu();
@@ -51,6 +53,13 @@ namespace AkaYasuo
             YMenu.AddGroupLabel("Welcome to my Yasuo Addon have fun! :)");
         }
 
+        public static void Predictionmenu()
+        {
+            PredictionMenu = YMenu.AddSubMenu("Prediction", "Prediction");
+            PredictionMenu.Add("QPred", new Slider("Q Prediction", 40, 0, 100));
+            PredictionMenu.Add("Q3Pred", new Slider("Q3 Prediction", 60, 0, 100));
+        }
+
         public static void Combomenu()
         {
             ComboMenu = YMenu.AddSubMenu("Combo", "Combo");
@@ -67,7 +76,7 @@ namespace AkaYasuo
             ComboMenu.AddGroupLabel("R Combo Settings");
             foreach (var hero in EntityManager.Heroes.Enemies.Where(x => x.IsEnemy))
             {
-                ComboMenu.Add(hero.ChampionName, new CheckBox("Use R if target is " + hero.ChampionName));
+                //ComboMenu.Add(hero.ChampionName, new CheckBox("Use R if target is " + hero.ChampionName));
             }
             ComboMenu.AddSeparator();
             ComboMenu.Add("R4", new CheckBox("Use R Instantly when >= 1 ally is in Range"));

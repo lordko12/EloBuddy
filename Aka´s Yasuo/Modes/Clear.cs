@@ -26,14 +26,14 @@ namespace AkaYasuo.Modes
 
                     var monsterObj = (EntityManager.MinionsAndMonsters.GetJungleMonsters(Variables._Player.GetDashInfo().EndPos, Variables.QCirWidth));
 
-                    if ((minionObj.Any(i => DamageManager._GetQDmg(i) >= i.Health || i.Team == GameObjectTeam.Neutral)
+                    if (minionObj != null && (minionObj.Any(i => DamageManager._GetQDmg(i) >= i.Health || i.Team == GameObjectTeam.Neutral)
                          || minionObj.Count() > 1) && Variables._Player.Distance(Variables._Player.GetDashInfo().EndPos) < 150
                         )
                     {
                         Variables.CastQCir(minionObj.MinOrDefault(i => i.Distance(Variables._Player)));
                     }
 
-                    if ((monsterObj.Any(i => DamageManager._GetQDmg(i) >= i.Health || i.Team == GameObjectTeam.Neutral)
+                    if (monsterObj != null && (monsterObj.Any(i => DamageManager._GetQDmg(i) >= i.Health || i.Team == GameObjectTeam.Neutral)
                           || monsterObj.Count() > 1) && Variables._Player.Distance(Variables._Player.GetDashInfo().EndPos) < 150
                         )
                     {
@@ -49,7 +49,7 @@ namespace AkaYasuo.Modes
                     var monsterObj = EntityManager.MinionsAndMonsters.GetJungleMonsters(Variables._Player.ServerPosition,
     !Variables.HaveQ3 ? Variables.QRange : Variables.Q2Range).OrderByDescending(m => m.Health);
 
-                    if (minionObj.Any())
+                    if (minionObj != null && minionObj.Any())
                     {
                         if (!Variables.HaveQ3)
                         {
@@ -71,7 +71,7 @@ namespace AkaYasuo.Modes
                         }
                     }
 
-                    if (monsterObj.Any())
+                    if (monsterObj != null && monsterObj.Any())
                     {
                         if (!Variables.HaveQ3)
                         {
@@ -107,7 +107,7 @@ namespace AkaYasuo.Modes
         .Where(i => Variables.CanCastE(i) && !(Variables.PosAfterE(i).IsUnderTurret()))
         .ToList();
 
-                if (minionObj.Any())
+                if (minionObj != null && minionObj.Any())
                 {
                     var obj = minionObj.FirstOrDefault(i => DamageManager._GetEDmg(i) >= i.Health);
                     if (obj != null)
@@ -116,7 +116,7 @@ namespace AkaYasuo.Modes
                     }
                 }
 
-                if (monsterObj.Any())
+                if (monsterObj != null && monsterObj.Any())
                 {
                     var obj = monsterObj.FirstOrDefault(i => DamageManager._GetEDmg(i) >= i.Health);
                     if (obj != null)

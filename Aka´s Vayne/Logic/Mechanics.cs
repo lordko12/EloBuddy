@@ -1,38 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AddonTemplate.Logic;
+using System.Text;
+using System.Threading.Tasks;
 using EloBuddy;
 using EloBuddy.SDK;
-using EloBuddy.SDK.Menu.Values;
 using SharpDX;
 
-namespace Aka_s_Vayne_reworked.Logic
+namespace Aka_s_Vayne.Logic
 {
-    internal class Mechanics
+    class Mechanics
     {
-        public static void FlashE()
-        {
-            var positions = GetRotatedFlashPositions();
-
-            foreach (var p in positions)
-            {
-                var condemnUnit = CondemnCheck(p);
-                if (condemnUnit != null && MenuManager.CondemnMenu["flashe"].Cast<KeyBind>().CurrentValue)
-                {
-                    Program.E.Cast(condemnUnit);
-
-                    Variables._Player.Spellbook.CastSpell(Variables.FlashSlot, p);
-
-                }
-            }
-        }
-
+        #region Mechanics:Insec
         public static void Insec()
         {
-            if (!MenuManager.CondemnMenu["insece"].Cast<KeyBind>().CurrentValue) return;
+            if (!Manager.MenuManager.InsecE) return;
 
-            var mode = (MenuManager.CondemnMenu["insecmodes"].Cast<ComboBox>().CurrentValue);
+            Orbwalker.OrbwalkTo(Game.CursorPos);
+            var mode = (Manager.MenuManager.InsecPositions);
             var target = TargetSelector.GetTarget((int)Variables._Player.GetAutoAttackRange(),
     DamageType.Physical);
             if (target != null)
@@ -50,16 +35,16 @@ namespace Aka_s_Vayne_reworked.Logic
                             Variables._Player.ServerPosition.Distance(hero.Position) + 100 >=
                             target.Distance(hero.Position))
                         {
-                            var ePred = Program.E2.GetPrediction(target);
+                            var ePred = Manager.SpellManager.E2.GetPrediction(target);
                             int pushDist = 550;
-                            for (int i = 0; i < pushDist; i += (int) target.BoundingRadius)
+                            for (int i = 0; i < pushDist; i += (int)target.BoundingRadius)
                             {
                                 Vector3 loc3 =
                                     ePred.UnitPosition.To2D().Extend(GetFlashPos(target, true).To2D(), -i).To3D();
                                 if (loc3.Distance(hero) < hero.Position.Distance(target))
                                 {
                                     Variables._Player.Spellbook.CastSpell(Variables.FlashSlot, GetFlashPos(target, true));
-                                    Program.E.Cast(target);
+                                    Manager.SpellManager.E.Cast(target);
                                 }
                             }
                         }
@@ -74,16 +59,16 @@ namespace Aka_s_Vayne_reworked.Logic
                             Variables._Player.ServerPosition.Distance(turret.Position) + 100 >=
                             target.Distance(turret.Position))
                         {
-                            var ePred = Program.E2.GetPrediction(target);
+                            var ePred = Manager.SpellManager.E2.GetPrediction(target);
                             int pushDist = 550;
-                            for (int i = 0; i < pushDist; i += (int) target.BoundingRadius)
+                            for (int i = 0; i < pushDist; i += (int)target.BoundingRadius)
                             {
                                 Vector3 loc3 =
                                     ePred.UnitPosition.To2D().Extend(GetFlashPos(target, true).To2D(), -i).To3D();
                                 if (loc3.Distance(turret) < turret.Position.Distance(target))
                                 {
                                     Variables._Player.Spellbook.CastSpell(Variables.FlashSlot, GetFlashPos(target, true));
-                                    Program.E.Cast(target);
+                                    Manager.SpellManager.E.Cast(target);
                                 }
                             }
                         }
@@ -93,20 +78,40 @@ namespace Aka_s_Vayne_reworked.Logic
                             Variables._Player.ServerPosition.Distance(Game.CursorPos) + 100 >=
                             target.Distance(Game.CursorPos))
                         {
-                            var ePred = Program.E2.GetPrediction(target);
+                            var ePred = Manager.SpellManager.E2.GetPrediction(target);
                             int pushDist = 550;
-                            for (int i = 0; i < pushDist; i += (int) target.BoundingRadius)
+                            for (int i = 0; i < pushDist; i += (int)target.BoundingRadius)
                             {
                                 Vector3 loc3 =
                                     ePred.UnitPosition.To2D().Extend(GetFlashPos(target, true).To2D(), -i).To3D();
                                 if (loc3.Distance(Game.CursorPos) < Game.CursorPos.Distance(target))
                                 {
                                     Variables._Player.Spellbook.CastSpell(Variables.FlashSlot, GetFlashPos(target, true));
-                                    Program.E.Cast(target);
+                                    Manager.SpellManager.E.Cast(target);
                                 }
                             }
                         }
                         break;
+
+                }
+            }
+        }
+        #endregion
+        #region Mechanics:FlashE
+        public static void FlashE()
+        {
+            if (!Manager.MenuManager.FlashE) return;
+
+            var positions = GetRotatedFlashPositions();
+
+            foreach (var p in positions)
+            {
+                var condemnUnit = CondemnCheck(p);
+                if (condemnUnit != null)
+                {
+                    Manager.SpellManager.E.Cast(condemnUnit);
+
+                    Variables._Player.Spellbook.CastSpell(Variables.FlashSlot, p);
 
                 }
             }
@@ -125,7 +130,7 @@ namespace Aka_s_Vayne_reworked.Logic
         public static Vector2 GetFirstNonWallPos(Vector2 startPos, Vector2 endPos)
         {
             int distance = 0;
-            for (int i = 0; i < MenuManager.CondemnMenu["pushDistance"].Cast<Slider>().CurrentValue; i += 20)
+            for (int i = 0; i < Manager.MenuManager.CondemnPushDistance; i += 20)
             {
                 var cell = startPos.Extend(endPos, endPos.Distance(startPos) + i);
                 if (NavMesh.GetCollisionFlags(cell).HasFlag(CollisionFlags.Wall) ||
@@ -178,13 +183,13 @@ namespace Aka_s_Vayne_reworked.Logic
         {
             var HeroList = EntityManager.Heroes.Enemies.Where(
                 h =>
-                    h.IsValidTarget(Program.E.Range) &&
+                    h.IsValidTarget(Manager.SpellManager.E.Range) &&
                     !h.HasBuffOfType(BuffType.SpellShield) &&
                     !h.HasBuffOfType(BuffType.SpellImmunity));
             foreach (var Hero in HeroList)
             {
-                var ePred = Program.E2.GetPrediction(Hero);
-                int pushDist = MenuManager.CondemnMenu["pushDistance"].Cast<Slider>().CurrentValue;
+                var ePred = Manager.SpellManager.E2.GetPrediction(Hero);
+                int pushDist = Manager.MenuManager.CondemnPushDistance;
                 for (int i = 0; i < pushDist; i += (int)Hero.BoundingRadius)
                 {
                     Vector3 loc3 = ePred.UnitPosition.To2D().Extend(fromPosition.To2D(), -i).To3D();
@@ -197,6 +202,20 @@ namespace Aka_s_Vayne_reworked.Logic
             }
             return null;
         }
+        #endregion
+        #region Mechanics:RotE
+        public static void RotE()
+        {
+            var target = TargetSelector.GetTarget((int)Manager.SpellManager.zzrot.Range, DamageType.Physical);
+            if (Manager.MenuManager.RotE && Manager.SpellManager.E.IsReady() && Manager.SpellManager.zzrot.IsReady() && target != null)
+            {
+                if (Manager.SpellManager.E.Cast(target))
+                {
+                    Core.DelayAction(() => Manager.SpellManager.zzrot.Cast(target.ServerPosition.Extend(Variables._Player.ServerPosition, -100)), 100);
+                }
+            }
+        }
+        #endregion
     }
 }
 

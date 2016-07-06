@@ -17,6 +17,9 @@ namespace FakeClicks
 {
     class FakeClick
     {
+        private static float lastclick;
+        private static readonly Random r = new Random();
+
         private static Menu Menu;
 
         private static AIHeroClient _Player
@@ -24,14 +27,19 @@ namespace FakeClicks
             get { return ObjectManager.Player; }
         }
 
-        public static bool Enabled
+        private static bool Enabled
         {
             get { return Menu["Enable"].Cast<CheckBox>().CurrentValue; }
         }
 
-        public static bool Stream
+        private static bool Stream
         {
             get { return Menu["Stream"].Cast<KeyBind>().CurrentValue; }
+        }
+
+        private static int Random
+        {
+            get { return Menu["Random"].Cast<Slider>().CurrentValue; }
         }
 
         static void Main(string[] args)
@@ -41,13 +49,13 @@ namespace FakeClicks
 
         static void OnLoadComplete(EventArgs args)
         {
-            Spellbook.OnCastSpell += BeforeSpellCast;
             Orbwalker.OnPostAttack += AfterAttack;
             Player.OnIssueOrder += OnIssueOrder;
             Game.OnUpdate += GameOnUpdate;
 
             Menu = MainMenu.AddMenu("StreamBuddy", "streambufdydyd");
             Menu.Add("Enable", new CheckBox("Enable"));
+            Menu.Add("Random", new Slider("Random Modifier", 100, 0, 1000));
             Menu.AddLabel("Note: The menu will be disabled too!");
             Menu.Add("Stream", new KeyBind("Stream", false, KeyBind.BindTypes.PressToggle, 'H'));
         }
@@ -80,7 +88,6 @@ namespace FakeClicks
 
         private static void AfterAttack(AttackableUnit target, EventArgs args)
         {
-            attacking = false;
             var t = target as AIHeroClient;
             if (t != null)
             {
@@ -93,36 +100,19 @@ namespace FakeClicks
             if (sender.IsMe &&
                 (args.Order == GameObjectOrder.MoveTo || args.Order == GameObjectOrder.AttackUnit ||
                  args.Order == GameObjectOrder.AttackTo) &&
-                lastOrderTime + r.NextFloat(deltaT, deltaT + .2f) < Game.Time &&
-                Menu["Enable"].Cast<CheckBox>().CurrentValue)
+                lastclick + r.NextFloat(0.2f, 0.2f + .2f) < Game.Time)
             {
-                var vect = args.TargetPosition;
-                vect.Z = _Player.Position.Z;
+                var clickpos = args.TargetPosition;
                 if (args.Order == GameObjectOrder.AttackUnit || args.Order == GameObjectOrder.AttackTo)
                 {
-                    ShowClick(Randomize(vect), ClickType.Attack);
+                    ShowClick(Randomize(clickpos), ClickType.Attack);
                 }
                 else
                 {
-                    ShowClick(vect, ClickType.Move);
+                    ShowClick(clickpos, ClickType.Move);
                 }
 
-                lastOrderTime = Game.Time;
-            }
-        }
-
-        private static void BeforeSpellCast(Spellbook s, SpellbookCastSpellEventArgs args)
-        {
-            var target = args.Target;
-
-            if (target == null)
-            {
-                return;
-            }
-
-            if (target.Position.Distance(_Player.Position) >= 5f)
-            {
-                ShowClick(args.Target.Position, ClickType.Attack);
+                lastclick = Game.Time;
             }
         }
 
@@ -130,19 +120,14 @@ namespace FakeClicks
         {
             if (r.Next(2) == 0)
             {
-                input.X += r.Next(100);
+                input.X += r.Next(Random);
             }
             else
             {
-                input.Y += r.Next(100);
+                input.Y += r.Next(Random);
             }
 
             return input;
         }
-
-        private static bool attacking;
-        private static readonly float deltaT = 0.15f;
-        private static float lastOrderTime;
-        private static readonly Random r = new Random();
     }
 }

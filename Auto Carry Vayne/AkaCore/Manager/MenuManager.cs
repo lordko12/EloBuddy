@@ -624,15 +624,15 @@ namespace AkaCore.Manager
         }
         public static int AutolvlSlider
         {
-            get { return (UtilityMenu["AutolvlS"].Cast<Slider>().CurrentValue); }
+            get { return (UtilityMenu["AutolvlS"].Cast<ComboBox>().CurrentValue); }
         }
         public static int AutobuySlider
         {
-            get { return (UtilityMenu["AutobuyS"].Cast<Slider>().CurrentValue); }
+            get { return (UtilityMenu["AutobuyS"].Cast<ComboBox>().CurrentValue); }
         }
         public static int AutobuytrinketsSlider
         {
-            get { return (UtilityMenu["AutobuytS"].Cast<Slider>().CurrentValue); }
+            get { return (UtilityMenu["AutobuytS"].Cast<ComboBox>().CurrentValue); }
         }
         public static int AutlanternHp
         {

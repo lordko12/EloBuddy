@@ -20,7 +20,6 @@ namespace Auto_Carry_Vayne.Manager
     JungleClearMenu,
     FleeMenu,
     MiscMenu,
-    ItemMenu,
     DrawingMenu;
 
         public static void Load()
@@ -35,7 +34,6 @@ namespace Auto_Carry_Vayne.Manager
             if (Variables.JC == true) JungleClearmenu();
             if (Variables.Flee == true) Fleemenu();
             if (Variables.Misc == true) Miscmenu();
-            if (Variables.Activator == true) Activator();
             if (Variables.Draw == true) Drawingmenu();
         }
 
@@ -58,7 +56,6 @@ namespace Auto_Carry_Vayne.Manager
             VMenu.Add("LC", new CheckBox("More LaneClear Options", false));
             VMenu.Add("JC", new CheckBox("More JungleClear Options", false));
             VMenu.Add("Misc", new CheckBox("More Misc Options", false));
-            VMenu.Add("Activator", new CheckBox("More Activator Options", false));
             VMenu.Add("Drawing", new CheckBox("More Drawing Options", false));
             #region CheckMenu
 
@@ -96,11 +93,6 @@ namespace Auto_Carry_Vayne.Manager
             if (VMenu["Misc"].Cast<CheckBox>().CurrentValue)
             {
                 Variables.Misc = true;
-            }
-            //Activator
-            if (VMenu["Activator"].Cast<CheckBox>().CurrentValue)
-            {
-                Variables.Activator = true;
             }
             //Drawing
             if (VMenu["Drawing"].Cast<CheckBox>().CurrentValue)
@@ -185,59 +177,6 @@ namespace Auto_Carry_Vayne.Manager
             MiscMenu.Add("InterruptE", new CheckBox("Interrupt E"));
             MiscMenu.Add("LowLifeE", new CheckBox("Low Life E", false));
             MiscMenu.Add("LowLifeES", new Slider("Low Life E if =>", 20));
-            MiscMenu.AddGroupLabel("Utility");
-            MiscMenu.Add("Skinhack", new CheckBox("Activate Skin hack", false));
-            MiscMenu.Add("SkinId", new ComboBox("Skin Hack", 0, "Default", "Vindicator", "Aristocrat", "Dragonslayer", "Heartseeker", "SKT T1", "Arclight", "Vayne Chroma Green", "Vayne Chroma Red", "Vayne Chroma Grey"));
-            MiscMenu.Add("Autolvl", new CheckBox("Activate Auto level"));
-            MiscMenu.Add("AutolvlS", new ComboBox("Level Mode", 0, "Max W", "Max Q(my style)"));
-            MiscMenu.Add("Autobuy", new CheckBox("Autobuy Starters"));
-            MiscMenu.Add("Autobuyt", new CheckBox("Autobuy Trinkets"));
-            MiscMenu.Add("Autolantern", new CheckBox("Auto Lantern"));
-            MiscMenu.Add("AutolanternHP", new Slider("Auto Lantern if Hp =>", 40));
-        }
-
-        private static void Activator()
-        {
-            ItemMenu = VMenu.AddSubMenu("Activator", "Activator");
-            ItemMenu.AddGroupLabel("Items");
-            ItemMenu.AddLabel("Ask me if you need more Items.");
-            ItemMenu.Add("Botrk", new CheckBox("Use Botrk & Bilge"));
-            ItemMenu.Add("You", new CheckBox("Use Youmuuus"));
-            ItemMenu.Add("YouS", new Slider("Use Youmuuus if Range =>", 500, 0, 1000));
-            ItemMenu.Add("AutoPotion", new CheckBox("Auto Healpotion"));
-            ItemMenu.Add("AutoPotionHp", new Slider("HpPot if hp <=", 60));
-            ItemMenu.Add("AutoBiscuit", new CheckBox("Auto Biscuit"));
-            ItemMenu.Add("AutoBiscuitHp", new Slider("Biscuit if hp <=", 60));
-            ItemMenu.AddGroupLabel("Summoners");
-            ItemMenu.AddLabel("Ask me if you need more Summoners.");
-            ItemMenu.Add("Heal", new CheckBox("Heal"));
-            ItemMenu.Add("HealHp", new Slider("Heal if my HP <=", 20, 0, 100));
-            ItemMenu.Add("HealAlly", new CheckBox("Heal ally"));
-            ItemMenu.Add("HealAllyHp", new Slider("Heal if ally HP <=", 20, 0, 100));
-            ItemMenu.Add("Barrier", new CheckBox("Barrier"));
-            ItemMenu.Add("BarrierHp", new Slider("Barrier if my HP <=", 20, 0, 100));
-            ItemMenu.AddGroupLabel("Qss");
-            ItemMenu.Add("Qss", new CheckBox("Use Qss"));
-            ItemMenu.Add("QssDelay", new Slider("Delay", 100, 0, 2000));
-            ItemMenu.Add("Blind",
-                new CheckBox("Blind", false));
-            ItemMenu.Add("Charm",
-                new CheckBox("Charm"));
-            ItemMenu.Add("Fear",
-                new CheckBox("Fear"));
-            ItemMenu.Add("Polymorph",
-                new CheckBox("Polymorph"));
-            ItemMenu.Add("Stun",
-                new CheckBox("Stun"));
-            ItemMenu.Add("Snare",
-                new CheckBox("Snare"));
-            ItemMenu.Add("Silence",
-                new CheckBox("Silence", false));
-            ItemMenu.Add("Taunt",
-                new CheckBox("Taunt"));
-            ItemMenu.Add("Suppression",
-                new CheckBox("Suppression"));
-
         }
 
         private static void Drawingmenu()
@@ -437,171 +376,8 @@ namespace Auto_Carry_Vayne.Manager
         {
             get { return (VMenu["Misc"].Cast<CheckBox>().CurrentValue ? MiscMenu["LowLifeES"].Cast<Slider>().CurrentValue : 20); }
         }
-
-        public static bool Skinhack
-        {
-            get { return (VMenu["Misc"].Cast<CheckBox>().CurrentValue ? MiscMenu["Skinhack"].Cast<CheckBox>().CurrentValue : false); }
-        }
-
-        public static int SkinId
-        {
-            get { return (VMenu["Misc"].Cast<CheckBox>().CurrentValue ? MiscMenu["SkinId"].Cast<ComboBox>().CurrentValue : 0); }
-        }
-
-        public static bool Autolvl
-        {
-            get { return (VMenu["Misc"].Cast<CheckBox>().CurrentValue ? MiscMenu["Autolvl"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static int AutolvlSlider
-        {
-            get { return (VMenu["Misc"].Cast<CheckBox>().CurrentValue ? MiscMenu["AutolvlS"].Cast<ComboBox>().CurrentValue : 0); }
-        }
-
-        public static bool AutobuyStarters
-        {
-            get { return (VMenu["Misc"].Cast<CheckBox>().CurrentValue ? MiscMenu["Autobuy"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static bool AutobuyTrinkets
-        {
-            get { return (VMenu["Misc"].Cast<CheckBox>().CurrentValue ? MiscMenu["Autobuyt"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static bool AutoLantern
-        {
-            get { return (VMenu["Misc"].Cast<CheckBox>().CurrentValue ? MiscMenu["Autolantern"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static int AutoLanternS
-        {
-            get { return (VMenu["Misc"].Cast<CheckBox>().CurrentValue ? MiscMenu["AutolanternHP"].Cast<Slider>().CurrentValue : 40); }
-        }
-
         #endregion checkvalues:Misc
-        #region checkvalues:Activator
 
-        public static bool Botrk
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["Botrk"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static bool Youmus
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["You"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static int YoumusSlider
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["YouS"].Cast<Slider>().CurrentValue : 500); }
-        }
-
-        public static bool AutoPotion
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["AutoPotion"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static bool AutoBiscuit
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["AutoBiscuit"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static int AutoBiscuitHp
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["AutoBiscuitHp"].Cast<Slider>().CurrentValue : 60); }
-        }
-
-        public static int AutoPotionHp
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["AutoPotionHp"].Cast<Slider>().CurrentValue : 60); }
-        }
-
-        public static bool Heal
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["Heal"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static int HealHp
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["HealHp"].Cast<Slider>().CurrentValue : 20); }
-        }
-
-        public static bool Barrier
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["Barrier"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static int BarrierHp
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["BarrierHp"].Cast<Slider>().CurrentValue : 20); }
-        }
-
-        public static bool HealAlly
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["HealAlly"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static int HealAllyHp
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["HealAllyHp"].Cast<Slider>().CurrentValue : 20); }
-        }
-
-        public static bool Qss
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["Qss"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static int QssDelay
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["QssDelay"].Cast<Slider>().CurrentValue : 0); }
-        }
-
-        public static bool QssBlind
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["Blind"].Cast<CheckBox>().CurrentValue : false); }
-        }
-
-        public static bool QssCharm
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["Charm"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static bool QssFear
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["Fear"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static bool QssPolymorph
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["Polymorph"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static bool QssStun
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["Stun"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static bool QssSnare
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["Snare"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static bool QssSilence
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["Silence"].Cast<CheckBox>().CurrentValue : false); }
-        }
-
-        public static bool QssTaunt
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["Taunt"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        public static bool QssSupression
-        {
-            get { return (VMenu["Activator"].Cast<CheckBox>().CurrentValue ? ItemMenu["Suppression"].Cast<CheckBox>().CurrentValue : true); }
-        }
-
-        #endregion checkvalues:Activator
         #region checkvalues:Drawing
         public static bool DrawQ
         {

@@ -33,14 +33,14 @@ namespace Aka_s_Vayne.Features.Modes
                 {
                     case 0:
                         //AfterAttack
-                        if (Variables.AfterAttack)
+                        if (Variables.IsAfterAttack)
                         {
                             Tumble.PreCastTumble(target);
                         }
                         break;
                     case 1:
                         //BeforeAttack
-                        if (Variables.BeforeAttack)
+                        if (Variables.IsBeforeAttack)
                         {
                             Tumble.PreCastTumble(target);
                         }
@@ -54,7 +54,7 @@ namespace Aka_s_Vayne.Features.Modes
 
         public static void UseE()
         {
-            if (Variables.AfterAttack && MenuManager.UseE && SpellManager.E.IsReady())
+            if (MenuManager.UseE && SpellManager.E.IsReady() && !MenuManager.AutoE) //!AutoE to save FPS
             {
                 Condemn.Execute();
             }

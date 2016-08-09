@@ -6,10 +6,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Auto_Carry_Vayne.Features.Module;
 using Auto_Carry_Vayne.Features.Module.Condemn;
-using Auto_Carry_Vayne.Features.Module.Items;
 using Auto_Carry_Vayne.Features.Module.Misc;
 using Auto_Carry_Vayne.Features.Module.Tumble;
-using Auto_Carry_Vayne.Features.Module.Summoners;
 
 namespace Auto_Carry_Vayne
 {
@@ -43,26 +41,12 @@ namespace Auto_Carry_Vayne
             new AutoE(),
             new EKS(),
             new LowLifeE(),
-            new Bilge(),
-            new Botrk(),
-            new Biscuit(),
-            new Potion(),
-            new Qss(),
-            new Youmus(),
             new NoAAStealth(),
             new QKS(),
             new FocusW(),
             new Reveal(),
             new AntiFlash(),
-            new Skinhack(),
-            new AutoBuyStarters(),
-            new AutoBuyTrinkets(),
-            new Autolvl(),
-            new Healally(),
-            new Healme(),
-            new Barrier(),
             new EInterrupt(),
-            new AutoLantern(),
         };
 
         public static bool ThreshInGame()

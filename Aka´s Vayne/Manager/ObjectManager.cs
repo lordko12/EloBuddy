@@ -12,7 +12,7 @@ namespace Aka_s_Vayne.Manager
     {
         private static List<GameObject> _traps;
 
-        private static readonly List<string> _trapNames = new List<string> { "teemo", "shroom", "trap", "mine", "ziggse_red", "jhin" };
+        private static readonly List<string> _trapNames = new List<string> { "teemo", "shroom", "trap", "mine", "ziggse_red" };
 
         public static List<GameObject> EnemyTraps
         {

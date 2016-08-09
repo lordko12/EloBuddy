@@ -21,7 +21,6 @@ namespace Aka_s_Vayne.Manager
             StealthManager.Load();
             //Less Fps drops i hope
             drawing.Load();
-
         }
     }
 }

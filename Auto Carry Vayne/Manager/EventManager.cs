@@ -4,6 +4,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Events;
 using System.Linq;
 using Auto_Carry_Vayne.Features.Module;
+using AkaCore.Features.Utility.Modules;
 
 namespace Auto_Carry_Vayne.Manager
 {
@@ -26,6 +27,11 @@ namespace Auto_Carry_Vayne.Manager
 
         private static void Game_OnUpdate(EventArgs args)
         {
+            if (FPSProtection.CheckFps())
+            {
+                return;
+            }
+
             Logic.Mechanics.FlashE();
             Logic.Mechanics.Insec();
 

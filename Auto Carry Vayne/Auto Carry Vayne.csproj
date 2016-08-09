@@ -56,6 +56,59 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AkaCore\AkaLib\Initialize.cs" />
+    <Compile Include="AkaCore\AkaLib\Item.cs" />
+    <Compile Include="AkaCore\Features\Activator\AInitialize.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Bilge.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Botrk.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Glory.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Hextech.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\HextechGLP.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\HextechPro.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Hydra.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Qss.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Queens.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Talis.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Tiamat.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Titanic.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Youmuss.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\FaceAlly.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\FaceMe.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\Glory.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\Omen.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\Seraph.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\SolariAlly.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\SolariMe.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\Talis.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\Zhonyas.cs" />
+    <Compile Include="AkaCore\Features\Activator\IModule.cs" />
+    <Compile Include="AkaCore\Features\Activator\Pots\Biscuit.cs" />
+    <Compile Include="AkaCore\Features\Activator\Pots\CorruptPot.cs" />
+    <Compile Include="AkaCore\Features\Activator\Pots\HpPot.cs" />
+    <Compile Include="AkaCore\Features\Activator\Pots\HunterPot.cs" />
+    <Compile Include="AkaCore\Features\Activator\Pots\RefillPot.cs" />
+    <Compile Include="AkaCore\Features\Activator\Summoners\Barrier.cs" />
+    <Compile Include="AkaCore\Features\Activator\Summoners\DubStepIgnite.cs" />
+    <Compile Include="AkaCore\Features\Activator\Summoners\Exhaust.cs" />
+    <Compile Include="AkaCore\Features\Activator\Summoners\HealAlly.cs" />
+    <Compile Include="AkaCore\Features\Activator\Summoners\HealMe.cs" />
+    <Compile Include="AkaCore\Features\Activator\Summoners\Smite.cs" />
+    <Compile Include="AkaCore\Features\Orbwalk\AutoCatch\Axe.cs" />
+    <Compile Include="AkaCore\Features\Orbwalk\AutoCatch\Events.cs" />
+    <Compile Include="AkaCore\Features\Orbwalk\IModule.cs" />
+    <Compile Include="AkaCore\Features\Orbwalk\OInitialize.cs" />
+    <Compile Include="AkaCore\Features\Utility\IModule.cs" />
+    <Compile Include="AkaCore\Features\Utility\Modules\Autobuy.cs" />
+    <Compile Include="AkaCore\Features\Utility\Modules\Autobuytrinkets.cs" />
+    <Compile Include="AkaCore\Features\Utility\Modules\Autolantern.cs" />
+    <Compile Include="AkaCore\Features\Utility\Modules\Autolvl.cs" />
+    <Compile Include="AkaCore\Features\Utility\Modules\FPS Protection.cs" />
+    <Compile Include="AkaCore\Features\Utility\Modules\Skinhack.cs" />
+    <Compile Include="AkaCore\Features\Utility\UInitialize.cs" />
+    <Compile Include="AkaCore\Manager\EventManager.cs" />
+    <Compile Include="AkaCore\Manager\Load.cs" />
+    <Compile Include="AkaCore\Manager\MenuManager.cs" />
+    <Compile Include="AkaCore\Program.cs" />
     <Compile Include="Features\Modes\Combo.cs" />
     <Compile Include="Features\Modes\Flee.cs" />
     <Compile Include="Features\Modes\Harass.cs" />
@@ -67,24 +120,10 @@
     <Compile Include="Features\Module\Condemn\Interrupter.cs" />
     <Compile Include="Features\Module\Condemn\LowLifePeel.cs" />
     <Compile Include="Features\Module\IModule.cs" />
-    <Compile Include="Features\Module\Items\Bilge.cs" />
-    <Compile Include="Features\Module\Items\Biscuit.cs" />
-    <Compile Include="Features\Module\Items\Botrk.cs" />
-    <Compile Include="Features\Module\Items\Potion.cs" />
-    <Compile Include="Features\Module\Items\Qss.cs" />
-    <Compile Include="Features\Module\Items\Youmus.cs" />
-    <Compile Include="Features\Module\Misc\Autobuystarters.cs" />
-    <Compile Include="Features\Module\Misc\Autobuytrinkets.cs" />
-    <Compile Include="Features\Module\Misc\AutoLantern.cs" />
-    <Compile Include="Features\Module\Misc\AutoLvl.cs" />
     <Compile Include="Features\Module\Misc\FocusW.cs" />
     <Compile Include="Features\Module\Misc\Gapcloser.cs" />
     <Compile Include="Features\Module\Misc\NoAAStealth.cs" />
     <Compile Include="Features\Module\Misc\Reveal.cs" />
-    <Compile Include="Features\Module\Misc\Skinhack.cs" />
-    <Compile Include="Features\Module\Summoners\Barrier.cs" />
-    <Compile Include="Features\Module\Summoners\Healally.cs" />
-    <Compile Include="Features\Module\Summoners\Healme.cs" />
     <Compile Include="Features\Module\Tumble\QKS.cs" />
     <Compile Include="Features\Modes\Drawing.cs" />
     <Compile Include="Logic\Mechanics.cs" />
@@ -104,7 +143,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="AkaCore\Features\Evade\" />
+    <Folder Include="AkaCore\Features\TS\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -2,66 +2,48 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C7EE2755-7C6F-43C0-89D4-CA4D61733E87}</ProjectGuid>
+    <ProjectGuid>{BBF33405-108A-4D96-B264-E85AAD694B06}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AkaYasuo</RootNamespace>
-    <AssemblyName>GosuMechanics_Yasuo</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Aka_s_Draven</RootNamespace>
+    <AssemblyName>Aka´s Draven</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EloBuddy">
-      <HintPath>C:\Users\Alex\AppData\Roaming\EloBuddy\Addons\Libraries\EloBuddy.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\EloBuddy\System\EloBuddy.dll</HintPath>
+    </Reference>
+    <Reference Include="EloBuddy.Sandbox">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\EloBuddy\System\EloBuddy.Sandbox.dll</HintPath>
     </Reference>
     <Reference Include="EloBuddy.SDK">
-      <HintPath>C:\Users\Alex\AppData\Roaming\EloBuddy\Addons\Libraries\EloBuddy.SDK.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\EloBuddy\System\EloBuddy.SDK.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX">
-      <HintPath>C:\Users\Alex\AppData\Roaming\EloBuddy\Addons\Libraries\SharpDX.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\EloBuddy\System\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -74,20 +56,74 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventManager.cs" />
-    <Compile Include="Events\_drawing.cs" />
-    <Compile Include="Events\_game.cs" />
-    <Compile Include="Events\_gameobject.cs" />
-    <Compile Include="Events\_interrupter.cs" />
-    <Compile Include="Events\_objaibase.cs" />
-    <Compile Include="Functions\Events\_objaibase.cs" />
-    <Compile Include="MenuManager.cs" />
-    <Compile Include="Modes\Combo.cs" />
-    <Compile Include="Modes\Flee.cs" />
-    <Compile Include="Modes\Harass.cs" />
-    <Compile Include="Modes\Items.cs" />
-    <Compile Include="Modes\LaneClear.cs" />
-    <Compile Include="Modes\PermaActive.cs" />
+    <Compile Include="AkaCore\AkaLib\Initialize.cs" />
+    <Compile Include="AkaCore\AkaLib\Item.cs" />
+    <Compile Include="AkaCore\Features\Activator\AInitialize.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Bilge.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Botrk.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Glory.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Hextech.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\HextechGLP.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\HextechPro.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Hydra.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Qss.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Queens.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Talis.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Tiamat.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Titanic.cs" />
+    <Compile Include="AkaCore\Features\Activator\AItems\Youmuss.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\FaceAlly.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\FaceMe.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\Glory.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\Omen.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\Seraph.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\SolariAlly.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\SolariMe.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\Talis.cs" />
+    <Compile Include="AkaCore\Features\Activator\DItems\Zhonyas.cs" />
+    <Compile Include="AkaCore\Features\Activator\IModule.cs" />
+    <Compile Include="AkaCore\Features\Activator\Pots\Biscuit.cs" />
+    <Compile Include="AkaCore\Features\Activator\Pots\CorruptPot.cs" />
+    <Compile Include="AkaCore\Features\Activator\Pots\HpPot.cs" />
+    <Compile Include="AkaCore\Features\Activator\Pots\HunterPot.cs" />
+    <Compile Include="AkaCore\Features\Activator\Pots\RefillPot.cs" />
+    <Compile Include="AkaCore\Features\Activator\Summoners\Barrier.cs" />
+    <Compile Include="AkaCore\Features\Activator\Summoners\DubStepIgnite.cs" />
+    <Compile Include="AkaCore\Features\Activator\Summoners\Exhaust.cs" />
+    <Compile Include="AkaCore\Features\Activator\Summoners\HealAlly.cs" />
+    <Compile Include="AkaCore\Features\Activator\Summoners\HealMe.cs" />
+    <Compile Include="AkaCore\Features\Activator\Summoners\Smite.cs" />
+    <Compile Include="AkaCore\Features\Orbwalk\AutoCatch\Axe.cs" />
+    <Compile Include="AkaCore\Features\Orbwalk\AutoCatch\Events.cs" />
+    <Compile Include="AkaCore\Features\Orbwalk\IModule.cs" />
+    <Compile Include="AkaCore\Features\Orbwalk\OInitialize.cs" />
+    <Compile Include="AkaCore\Features\Utility\IModule.cs" />
+    <Compile Include="AkaCore\Features\Utility\Modules\Autobuy.cs" />
+    <Compile Include="AkaCore\Features\Utility\Modules\Autobuytrinkets.cs" />
+    <Compile Include="AkaCore\Features\Utility\Modules\Autolantern.cs" />
+    <Compile Include="AkaCore\Features\Utility\Modules\Autolvl.cs" />
+    <Compile Include="AkaCore\Features\Utility\Modules\FPS Protection.cs" />
+    <Compile Include="AkaCore\Features\Utility\Modules\Skinhack.cs" />
+    <Compile Include="AkaCore\Features\Utility\UInitialize.cs" />
+    <Compile Include="AkaCore\Manager\EventManager.cs" />
+    <Compile Include="AkaCore\Manager\Load.cs" />
+    <Compile Include="AkaCore\Manager\MenuManager.cs" />
+    <Compile Include="AkaCore\Program.cs" />
+    <Compile Include="Features\Modes\Combo.cs" />
+    <Compile Include="Features\Modes\Drawings.cs" />
+    <Compile Include="Features\Modes\Flee.cs" />
+    <Compile Include="Features\Modes\Harass.cs" />
+    <Compile Include="Features\Modes\LaneClear.cs" />
+    <Compile Include="Features\Modules\AntiGap.cs" />
+    <Compile Include="Features\Modules\Autoharass.cs" />
+    <Compile Include="Features\Modules\IModule.cs" />
+    <Compile Include="Features\Modules\Interrupter.cs" />
+    <Compile Include="Features\Modules\KSE.cs" />
+    <Compile Include="Features\Modules\Init.cs" />
+    <Compile Include="Manager\EventManager.cs" />
+    <Compile Include="Manager\Manager.cs" />
+    <Compile Include="Manager\MenuManager.cs" />
+    <Compile Include="Manager\SpellManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Variables.cs" />
@@ -95,7 +131,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="AkaCore\Features\Evade\" />
+    <Folder Include="AkaCore\Features\TS\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

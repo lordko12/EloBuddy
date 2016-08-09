@@ -15,7 +15,7 @@ namespace Aka_s_Vayne.Logic
         static bool IsSafe(Vector3 position)
         {
             var closeEnemies =
-                    EntityManager.Heroes.Enemies.FindAll(en => en.IsValidTarget(1500f) && !(en.Distance(ObjectManager.Player.ServerPosition) < en.AttackRange + 65f))
+                    EntityManager.Heroes.Enemies.FindAll(en => en.IsValidTarget(1500f) && !en.IsDead && !(en.Distance(ObjectManager.Player.ServerPosition) < en.AttackRange + 65f))
                     .OrderBy(en => en.Distance(position));
 
             return closeEnemies.All(
@@ -29,7 +29,7 @@ namespace Aka_s_Vayne.Logic
                             || NavMesh.GetCollisionFlags(position).HasFlag(CollisionFlags.Building))
                 //&& position.IsNotIntoTraps()
                 && IsNotIntoEnemies(position)
-                && EntityManager.Heroes.Enemies.All(m => m.Distance(position) > 350f)
+                && EntityManager.Heroes.Enemies.All(m => !m.IsDead && m.Distance(position) > 350f)
                 && (!Variables.UnderEnemyTower((Vector2)position) || (Variables.UnderEnemyTower((Vector2)Variables._Player.Position) && Variables.UnderEnemyTower((Vector2)position) && ObjectManager.Player.HealthPercent > 10));
             //Either it is not under turret or both the player and the position are under turret already and the health percent is greater than 10.
         }
@@ -67,7 +67,7 @@ namespace Aka_s_Vayne.Logic
             var closeEnemies =
                 EntityManager.Heroes.Enemies.FindAll(
                     en =>
-                        en.IsValidTarget(1500f) &&
+                        en.IsValidTarget(1500f) && !en.IsDead &&
                         !(en.Distance(ObjectManager.Player.ServerPosition) < en.AttackRange + 65f));
             if (!closeEnemies.All(enemy => position.CountEnemiesInRange(enemy.AttackRange) <= 1))
             {

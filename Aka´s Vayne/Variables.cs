@@ -6,10 +6,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Aka_s_Vayne.Features.Module;
 using Aka_s_Vayne.Features.Module.Condemn;
-using Aka_s_Vayne.Features.Module.Items;
 using Aka_s_Vayne.Features.Module.Misc;
 using Aka_s_Vayne.Features.Module.Tumble;
-using Aka_s_Vayne.Features.Module.Summoners;
 
 namespace Aka_s_Vayne
 {
@@ -20,55 +18,45 @@ namespace Aka_s_Vayne
             get { return ObjectManager.Player; }
         }
 
-        public static Vector3 EndPosition = Vector3.Zero;
+        public static bool IsAfterAttack;
 
-        public static int currentSkin = 0;
+        public static bool IsBeforeAttack;
 
-        public static bool bought = false;
+        public static float lastTick, fps, delay, lastTickdelay, autoFpsBalancer, frameRate; //FPS Protection
 
-        public static int ticks = 0;
+        public static Vector3 TumblePosition = Vector3.Zero; //Tumble Prediction
 
-        public static float lastaa = 1f;
+        public static int currentSkin = 0; //Skin
 
-        public static float LastCondemnFlashTime { get; set; }
+        public static bool bought = false; //Autobuy
 
-        public static bool VayneUltiIsActive { get; set; }
+        public static int ticks = 0; //Autobuy
+
+        public static float LastCondemnFlashTime { get; set; } //Flash E
+
+        public static bool VayneUltiIsActive { get; set; } //Ult
 
         public static SpellSlot FlashSlot;
 
-        public static int[] AbilitySequence;
+        public static int[] AbilitySequence; //Autolvl
 
-        public static int QOff = 0, WOff = 0, EOff = 0, ROff = 0;
+        public static int QOff = 0, WOff = 0, EOff = 0, ROff = 0; //autolvl
 
         public static List<IModule> moduleList = new List<IModule>()
         {
             new AutoE(),
             new EKS(),
             new LowLifeE(),
-            new Bilge(),
-            new Botrk(),
-            new Biscuit(),
-            new Potion(),
-            new Qss(),
-            new Youmus(),
             new NoAAStealth(),
             new QKS(),
             new FocusW(),
             new Reveal(),
             new AntiFlash(),
-            new Skinhack(),
-            new AutoBuyStarters(),
-            new AutoBuyTrinkets(),
-            new Autolvl(),
-            new Healally(),
-            new Healme(),
-            new Barrier(),
             new EInterrupt(),
-            new AutoLantern(),
             new FlashCondemn(),
         };
 
-        public static bool ThreshInGame()
+        public static bool ThreshInGame() //Autolantern
         {
             return ObjectManager.Get<AIHeroClient>().Any(h => h.IsAlly && !h.IsMe && h.ChampionName == "Thresh");
         }
@@ -115,33 +103,6 @@ namespace Aka_s_Vayne
         {
             return Manager.MenuManager.J4Flag
                 && ObjectManager.Get<Obj_AI_Base>().Any(m => m.Distance(endPosition) <= target.BoundingRadius && m.Name == "Beacon");
-        }
-
-        public static bool AfterAttack
-        {
-            get
-            {
-                if (Game.Time * 1000 < lastaa + ObjectManager.Player.AttackDelay * 1000 - ObjectManager.Player.AttackDelay * 1000 / 2.35 && Game.Time * 1000 > lastaa + ObjectManager.Player.AttackCastDelay * 1000)
-                {
-                    return true;
-                }
-                return false;
-            }
-        }
-
-        public static bool BeforeAttack
-        {
-            get
-            {
-                if (Game.Time * 1000 >
-                    Variables.lastaa + Variables._Player.AttackDelay * 1000 - Variables._Player.AttackDelay * 1000 / 2 &&
-                    Game.Time * 1000 <
-                    Variables.lastaa + Variables._Player.AttackDelay * 1000 - Variables._Player.AttackDelay * 1000 / 4)
-                {
-                    return true;
-                }
-                return false;
-            }
         }
 
         public static IEnumerable<AIHeroClient> MeleeEnemiesTowardsMe

@@ -93,6 +93,18 @@
     <Compile Include="Features\Activator\Summoners\HealAlly.cs" />
     <Compile Include="Features\Activator\Summoners\HealMe.cs" />
     <Compile Include="Features\Activator\Summoners\Smite.cs" />
+    <Compile Include="Features\Orbwalk\AutoCatch\Axe.cs" />
+    <Compile Include="Features\Orbwalk\AutoCatch\Events.cs" />
+    <Compile Include="Features\Orbwalk\IModule.cs" />
+    <Compile Include="Features\Orbwalk\OInitialize.cs" />
+    <Compile Include="Features\Utility\IModule.cs" />
+    <Compile Include="Features\Utility\Modules\Autobuy.cs" />
+    <Compile Include="Features\Utility\Modules\Autobuytrinkets.cs" />
+    <Compile Include="Features\Utility\Modules\Autolantern.cs" />
+    <Compile Include="Features\Utility\Modules\Autolvl.cs" />
+    <Compile Include="Features\Utility\Modules\FPS Protection.cs" />
+    <Compile Include="Features\Utility\Modules\Skinhack.cs" />
+    <Compile Include="Features\Utility\UInitialize.cs" />
     <Compile Include="Manager\EventManager.cs" />
     <Compile Include="Manager\Load.cs" />
     <Compile Include="Manager\MenuManager.cs" />
@@ -104,8 +116,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\Evade\" />
-    <Folder Include="Features\Gapcloser\" />
-    <Folder Include="Features\Orbwalk\" />
     <Folder Include="Features\TS\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

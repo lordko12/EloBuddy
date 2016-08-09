@@ -14,8 +14,9 @@ namespace Aka_s_Vayne
         private static void Loading_OnLoadingComplete(EventArgs args)
         {
             if (Variables._Player.ChampionName != "Vayne") return;
-            Chat.Print("Aka´s Vayne loaded! Made by Aka.");
+            AkaCore.Program.Load(args);
             Manager.Manager.Load();
+            Chat.Print("Aka´s Vayne loaded! Made by Aka.");
         }
     }
 }

@@ -87,8 +87,8 @@ namespace Aka_s_Vayne.Features.Utility
             if (Manager.MenuManager.DrawTumble)
             {
 
-                var startpos = Variables._Player.Position.Extend(Variables.EndPosition, 10);
-                var endpos = startpos.Extend(Variables.EndPosition, Manager.SpellManager.Q.Range);
+                var startpos = Variables._Player.Position.Extend(Variables.TumblePosition, 10);
+                var endpos = startpos.Extend(Variables.TumblePosition, Manager.SpellManager.Q.Range);
                 var endpos1 = (Vector3)endpos +
               (startpos - endpos).Normalized().Rotated(45 * (float)Math.PI / 180).To3D() *
               Variables._Player.BoundingRadius;

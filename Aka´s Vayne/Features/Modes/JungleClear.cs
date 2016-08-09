@@ -15,7 +15,7 @@ namespace Aka_s_Vayne.Features.Modes
 
         public static void UseQ()
         {
-            if (Manager.MenuManager.UseQJC && Manager.SpellManager.Q.IsReady() && Variables.AfterAttack)
+            if (Manager.MenuManager.UseQJC && Manager.SpellManager.Q.IsReady() && Variables.IsAfterAttack)
             {
                 foreach (var Mob in EntityManager.MinionsAndMonsters.Monsters.Where(x => x.IsValid && !x.IsDead && x.Position.Distance(Variables._Player) < Variables._Player.GetAutoAttackRange(x)))
                 {

@@ -140,11 +140,11 @@ namespace AkaCore.Manager
             UtilityMenu.AddGroupLabel("Utility");
             UtilityMenu.Add("Skinhack", new CheckBox("Activate Skin hack", false));
             UtilityMenu.Add("SkinID", new Slider("SkinID", 0, 0, 15));
-            UtilityMenu.Add("Autolvl", new CheckBox("Activate Auto level", false));
+            UtilityMenu.Add("Autolvl", new CheckBox("Activate Auto level"));
             UtilityMenu.Add("AutolvlS", new ComboBox("Level Mode", 0, "Max Q", "Max W", "Max E"));
-            UtilityMenu.Add("Autobuy", new CheckBox("Autobuy Starters", false));
+            UtilityMenu.Add("Autobuy", new CheckBox("Autobuy Starters"));
             UtilityMenu.Add("AutobuyS", new ComboBox("Starter Item", 0, "Dorans Blade", "Dorans Ring", "Dorans Shield", "Corrupting Potion", "Hunters Machete", "Hunters Talisman", "Ancient Coin", "SpellThiefs", "Relic Shield"));
-            UtilityMenu.Add("Autobuyt", new CheckBox("Upgrade Trinkets", false));
+            UtilityMenu.Add("Autobuyt", new CheckBox("Upgrade Trinkets"));
             UtilityMenu.Add("AutobuytS", new ComboBox("Upgrade to", 0, "Farsight Alteration", "Oracle Alteration"));
             UtilityMenu.Add("Autolantern", new CheckBox("Auto Lantern"));
             UtilityMenu.Add("AutolanternHP", new Slider("Auto Lantern if Hp =>", 40));
@@ -160,7 +160,11 @@ namespace AkaCore.Manager
                 OrbwalkerMenu.Add("Qmode", new ComboBox("Axe Catch Mode", 1, "Combo", "Always", "Never"));
                 OrbwalkerMenu.Add("Qrange", new Slider("Catch Axe Range:", 800, 120, 1500));
                 OrbwalkerMenu.Add("WforQ", new CheckBox("Use W if axe to far away"));
-                OrbwalkerMenu.Add("Qunderturret", new CheckBox("Don´t catch under turret"));
+                OrbwalkerMenu.AddGroupLabel("Safety Options");
+                OrbwalkerMenu.Add("Qturret", new CheckBox("Don´t catch under turret"));
+                OrbwalkerMenu.Add("Qenemies", new CheckBox("Don´t catch in enemy group"));
+                OrbwalkerMenu.Add("Qkill", new CheckBox("Don´t catch if can kill"));
+                OrbwalkerMenu.Add("Qmelee", new CheckBox("Don´t catch near melees"));
                 OrbwalkerMenu.AddGroupLabel("Drawings");
                 OrbwalkerMenu.Add("DrawAxe", new CheckBox("Draw Axe"));
                 OrbwalkerMenu.Add("DrawAxeRange", new CheckBox("Draw Axe catch Range"));
@@ -182,11 +186,11 @@ namespace AkaCore.Manager
         private static void FPSMenu()
         {
             FPS = HMenu.AddSubMenu("FPS Protection", "asd");
-            FPS.AddGroupLabel("This is only working with my addons :/");
-            /*
+            //FPS.AddGroupLabel("This is only working with my addons :/");
+            
             FPS.Add("minfps", new Slider("Min Fps", 45, 1, 350));
             FPS.Add("calcps", new Slider("Calculations per Sec", 35, 1, 350));
-            FPS.Add("enablefps", new CheckBox("Enable FPS Protection")); */
+            FPS.Add("enablefps", new CheckBox("Enable FPS Protection"));
         }
 
         #region checkvalues
@@ -654,10 +658,6 @@ namespace AkaCore.Manager
         {
             get { return (OrbwalkerMenu["WforQ"].Cast<CheckBox>().CurrentValue); }
         }
-        public static bool CatchTower
-        {
-            get { return (OrbwalkerMenu["Qunderturret"].Cast<CheckBox>().CurrentValue); }
-        }
         public static bool DrawAxe
         {
             get { return (OrbwalkerMenu["DrawAxe"].Cast<CheckBox>().CurrentValue); }
@@ -667,10 +667,28 @@ namespace AkaCore.Manager
             get { return (OrbwalkerMenu["DrawAxeRange"].Cast<CheckBox>().CurrentValue); }
         }
         #endregion
+        #region safety
+        public static bool CatchTower
+        {
+            get { return (OrbwalkerMenu["Qturret"].Cast<CheckBox>().CurrentValue); }
+        }
+        public static bool CatchEnemies
+        {
+            get { return (OrbwalkerMenu["Qenemies"].Cast<CheckBox>().CurrentValue); }
+        }
+        public static bool CatchKill
+        {
+            get { return (OrbwalkerMenu["Qkill"].Cast<CheckBox>().CurrentValue); }
+        }
+        public static bool CatchMelees
+        {
+            get { return (OrbwalkerMenu["Qmelee"].Cast<CheckBox>().CurrentValue); }
+        }
+        #endregion
         #endregion
         #endregion
         #region checkvalues:fps
-        
+
         public static int MinFps
         {
             get { return (FPS["minfps"].Cast<Slider>().CurrentValue); }

@@ -160,7 +160,11 @@ namespace AkaCore.Manager
                 OrbwalkerMenu.Add("Qmode", new ComboBox("Axe Catch Mode", 1, "Combo", "Always", "Never"));
                 OrbwalkerMenu.Add("Qrange", new Slider("Catch Axe Range:", 800, 120, 1500));
                 OrbwalkerMenu.Add("WforQ", new CheckBox("Use W if axe to far away"));
-                OrbwalkerMenu.Add("Qunderturret", new CheckBox("Don´t catch under turret"));
+                OrbwalkerMenu.AddGroupLabel("Safety Options");
+                OrbwalkerMenu.Add("Qturret", new CheckBox("Don´t catch under turret"));
+                OrbwalkerMenu.Add("Qenemies", new CheckBox("Don´t catch in enemy group"));
+                OrbwalkerMenu.Add("Qkill", new CheckBox("Don´t catch if can kill"));
+                OrbwalkerMenu.Add("Qmelee", new CheckBox("Don´t catch near melees"));
                 OrbwalkerMenu.AddGroupLabel("Drawings");
                 OrbwalkerMenu.Add("DrawAxe", new CheckBox("Draw Axe"));
                 OrbwalkerMenu.Add("DrawAxeRange", new CheckBox("Draw Axe catch Range"));
@@ -654,10 +658,6 @@ namespace AkaCore.Manager
         {
             get { return (OrbwalkerMenu["WforQ"].Cast<CheckBox>().CurrentValue); }
         }
-        public static bool CatchTower
-        {
-            get { return (OrbwalkerMenu["Qunderturret"].Cast<CheckBox>().CurrentValue); }
-        }
         public static bool DrawAxe
         {
             get { return (OrbwalkerMenu["DrawAxe"].Cast<CheckBox>().CurrentValue); }
@@ -667,10 +667,28 @@ namespace AkaCore.Manager
             get { return (OrbwalkerMenu["DrawAxeRange"].Cast<CheckBox>().CurrentValue); }
         }
         #endregion
+        #region safety
+        public static bool CatchTower
+        {
+            get { return (OrbwalkerMenu["Qturret"].Cast<CheckBox>().CurrentValue); }
+        }
+        public static bool CatchEnemies
+        {
+            get { return (OrbwalkerMenu["Qenemies"].Cast<CheckBox>().CurrentValue); }
+        }
+        public static bool CatchKill
+        {
+            get { return (OrbwalkerMenu["Qkill"].Cast<CheckBox>().CurrentValue); }
+        }
+        public static bool CatchMelees
+        {
+            get { return (OrbwalkerMenu["Qmelee"].Cast<CheckBox>().CurrentValue); }
+        }
+        #endregion
         #endregion
         #endregion
         #region checkvalues:fps
-        
+
         public static int MinFps
         {
             get { return (FPS["minfps"].Cast<Slider>().CurrentValue); }

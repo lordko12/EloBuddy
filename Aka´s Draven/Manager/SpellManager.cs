@@ -20,8 +20,14 @@ namespace Aka_s_Draven.Manager
         {
             Q = new Spell.Active(SpellSlot.Q, (uint)Variables._Player.GetAutoAttackRange());
             W = new Spell.Active(SpellSlot.W);
-            E = new Spell.Skillshot(SpellSlot.E, 1050, SkillShotType.Linear);
-            R = new Spell.Skillshot(SpellSlot.R, 2000, SkillShotType.Linear);
+            E = new Spell.Skillshot(SpellSlot.E, 1050, SkillShotType.Linear, 250, null, 130)
+            {
+                AllowedCollisionCount = int.MaxValue
+            };
+            R = new Spell.Skillshot(SpellSlot.R, 2000, SkillShotType.Linear, 250, null, 160)
+            {
+                AllowedCollisionCount = 0
+            };
         }
 
         public static void Load()

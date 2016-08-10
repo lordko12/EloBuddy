@@ -45,9 +45,7 @@ namespace Aka_s_Draven.Manager
             ComboMenu.Add("MaxQ", new Slider("Max Axes", 2, 1, 3));
             ComboMenu.Add("W", new CheckBox("Use W"));
             ComboMenu.Add("E", new CheckBox("Use E"));
-            ComboMenu.Add("EPred", new Slider("E Hitchance %", 60));
             ComboMenu.Add("R", new CheckBox("Use R"));
-            ComboMenu.Add("RPred", new Slider("R Hitchance %", 70));
         }
 
         private static void Harassmenu()
@@ -113,14 +111,6 @@ namespace Aka_s_Draven.Manager
         public static bool UseRCombo
         {
             get { return (ComboMenu["R"].Cast<CheckBox>().CurrentValue); }
-        }
-        public static int UseRComboPred
-        {
-            get { return (ComboMenu["RPred"].Cast<Slider>().CurrentValue); }
-        }
-        public static int UseEComboPred
-        {
-            get { return (ComboMenu["EPred"].Cast<Slider>().CurrentValue); }
         }
         #endregion
         #region Harass

@@ -44,7 +44,7 @@ namespace Aka_s_Draven.Features.Modes
             if (Manager.MenuManager.UseECombo && Manager.SpellManager.E.IsReady())
             {
                 var EPred = Manager.SpellManager.E.GetPrediction(target);
-                if (EPred.HitChancePercent >= Manager.MenuManager.UseEComboPred)
+                if (EPred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.Medium)
                 {
                     Manager.SpellManager.E.Cast(EPred.UnitPosition);
 
@@ -62,7 +62,7 @@ namespace Aka_s_Draven.Features.Modes
 
                 var RPred = Manager.SpellManager.R.GetPrediction(target);
 
-                if (killableTarget != null && RPred.HitChancePercent >= Manager.MenuManager.UseRComboPred)
+                if (killableTarget != null && RPred.HitChance >= EloBuddy.SDK.Enumerations.HitChance.Medium)
                 {
                     Manager.SpellManager.R.Cast(killableTarget);
                 }

@@ -24,10 +24,7 @@ namespace Aka_s_Draven.Manager
             {
                 AllowedCollisionCount = int.MaxValue
             };
-            R = new Spell.Skillshot(SpellSlot.R, 2000, SkillShotType.Linear, 250, null, 160)
-            {
-                AllowedCollisionCount = 0
-            };
+            R = new Spell.Skillshot(SpellSlot.R, 2000, SkillShotType.Linear, 250, null, 160);
         }
 
         public static void Load()

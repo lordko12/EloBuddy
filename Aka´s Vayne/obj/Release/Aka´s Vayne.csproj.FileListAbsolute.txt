@@ -1,0 +1,11 @@
+C:\Users\Alex\Documents\GitHub\EloBuddy\Aka´s Vayne\bin\Release\Auto Carry Vayne.exe.config
+C:\Users\Alex\Documents\GitHub\EloBuddy\Aka´s Vayne\bin\Release\Auto Carry Vayne.exe
+C:\Users\Alex\Documents\GitHub\EloBuddy\Aka´s Vayne\bin\Release\Auto Carry Vayne.pdb
+C:\Users\Alex\Documents\GitHub\EloBuddy\Aka´s Vayne\bin\Release\EloBuddy.dll
+C:\Users\Alex\Documents\GitHub\EloBuddy\Aka´s Vayne\bin\Release\EloBuddy.Sandbox.dll
+C:\Users\Alex\Documents\GitHub\EloBuddy\Aka´s Vayne\bin\Release\EloBuddy.SDK.dll
+C:\Users\Alex\Documents\GitHub\EloBuddy\Aka´s Vayne\bin\Release\SharpDX.dll
+C:\Users\Alex\Documents\GitHub\EloBuddy\Aka´s Vayne\bin\Release\SharpDX.Direct3D9.dll
+C:\Users\Alex\Documents\GitHub\EloBuddy\Aka´s Vayne\obj\Release\Aka´s Vayne.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Documents\GitHub\EloBuddy\Aka´s Vayne\obj\Release\Auto Carry Vayne.exe
+C:\Users\Alex\Documents\GitHub\EloBuddy\Aka´s Vayne\obj\Release\Auto Carry Vayne.pdb

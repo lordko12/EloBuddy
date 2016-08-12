@@ -518,7 +518,7 @@ namespace AkaCore.Manager
         }
         public static bool SGrap
         {
-            get { return (ActivatorMenu["SGrap"].Cast<CheckBox>().CurrentValue); }
+            get { return (ActivatorMenu["SCrap"].Cast<CheckBox>().CurrentValue); }
         }
         //Qssss
         public static bool Qss
